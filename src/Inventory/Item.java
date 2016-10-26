@@ -11,5 +11,10 @@ public class Item {
 	private String description;
 
 	private int itemID;
+	
+	String getItem(String name){
+		
+		Item = name;
+	}
 
 }
