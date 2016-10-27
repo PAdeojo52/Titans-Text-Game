@@ -3,7 +3,8 @@ package Entity ;
 public class Monster extends Entity 
 
 {
-
+	private int monsterID;
+	
 	private String name;
 	
 	private String description;
@@ -11,7 +12,15 @@ public class Monster extends Entity
 	private int aggressiveness;
 	
 	
-	
+	public Monster(int monID,String monName, String monDescription, int monAggressivness)
+	{
+		monID = this.monsterID;
+		monName = this.name;
+		monDescription = this.description;
+		monAggressivness = this.aggressiveness;
+		
+		
+	}
 
 	public String getName()
 	{
@@ -21,13 +30,24 @@ public class Monster extends Entity
 
 
 
+	public int getMonsterID()
+	{
+		return monsterID;
+	}
+
+	public void setMonsterID(int monsterID)
+	{
+		this.monsterID = monsterID;
+	}
+
+	
 	public void setName(String name)
 	{
 		this.name = name;
 	}
 
 
-
+/////
 
 	public String getDescription()
 	{

@@ -74,7 +74,7 @@ public class Entity
 		
 		if(finalValuePercentage > MAX_PERCENTAGE)
 		{
-			finalValuePercentage =100;
+			finalValuePercentage = 100;
 		}
 		
 		if( finalValuePercentage > 70)

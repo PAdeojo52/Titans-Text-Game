@@ -1,7 +1,7 @@
 package Entity;
 import java.util.ArrayList;
 import java.util.List;
-
+import Inventory.*;
 /**
  * Class: Player.java
  * 
@@ -18,10 +18,13 @@ import java.util.List;
  *  Purpose: – ******
  */
 
+
+
+
 public class Player extends Entity
 {
 	private int gold;
-	private List<Integer> inv;
+	private List<Item> invetory;
 	
 	
 	
@@ -37,22 +40,36 @@ public class Player extends Entity
 		//Will enact the potion
 	}
 	
-	public void equip(Inventory  newWeapon) 
+	public void equip(Item  newWeapon) 
 	{
-		inv.add(newWeapon);
+		
 
 	}
 
-	public void get(Inventory  newItem) 
+	public void get(Item  newItem) 
 	{
+		
+		invetory.add(newItem);
 
 	}
 
-	public void buy(Inventory  newItem) 
+	public void buy(Item  newItem) 
 	{
+		
+		if(gold - newItem.getPrice()>=0)
+		{
+			invetory.add(newItem);
+			System.out.println("The item has been purchased");
+		}
+		else
+		{
+			System.out.println("Insufficient Funds");
+		}
+		
+		
 
 	}
-
+//Cannot be done without the rest of the subsystems.
 	public void retreat() 
 	{
 		
