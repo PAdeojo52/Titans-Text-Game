@@ -1,3 +1,13 @@
+/**Class: 
+  * @author Kevin Stevens
+  * @version 1.0
+  * Course : 
+  * Written: 
+  * 
+  * 
+  * Purpose: - 
+  */
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;

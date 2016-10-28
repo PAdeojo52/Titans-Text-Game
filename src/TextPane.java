@@ -1,3 +1,13 @@
+/**Class: 
+  * @author Kevin Stevens
+  * @version 1.0
+  * Course : 
+  * Written: 
+  * 
+  * 
+  * Purpose: - 
+  */
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
