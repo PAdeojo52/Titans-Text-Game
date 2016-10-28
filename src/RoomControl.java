@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**Class: 
   * @author Joshua Gerth
   * @version 1.0
@@ -7,7 +9,7 @@
   * 
   * Purpose: - 
   */
-package talesOfTitans;
+//package talesOfTitans;
 
 public class RoomControl
 {
@@ -39,7 +41,7 @@ public class RoomControl
 		 "You are on a footpath in a dense forest. You can hear the sound of rushing water to the.",
 		 "A River flows eastbound alongside the trail.",
 		 "A great lake lies at the end of the trail. A clearing in the forest lies to the south.",
-		 "An ornate stone roadway cuts eastward through the forest. A nearby sign reads “NORTH: Lake Durnam. EAST: Athena”",
+		 "An ornate stone roadway cuts eastward through the forest. A nearby sign reads “NORTH: Lake Durnam. EAST: Athena�",
 		 "You are on the outskirts of a great city. A guard stands at his post, preventing all from entering.",
 		 "A great tower can be seen rising from the western horizon.",
 		 "There is a small clearing in the forest towards the Tower of Babel with a pitch black statue in the middle.",
@@ -65,12 +67,13 @@ public class RoomControl
 	  * Constructor also assigns Monsters and Puzzles to the rooms, as well as Items to the rooms
 	  * inventories.  
 	  */
-	public RoomControl()
+	public RoomControl(ArrayList<Room> rooms)
 	{
 		//Populate roomArray
 		for(byte index = 0; index < ID.length - 1; index++)
 		{
 			roomArray[index] = new Room(ID[index], description[index], isShop[index]);
+			rooms.add(roomArray[index]);
 		}
 		//Link rooms
 		//Mine Area

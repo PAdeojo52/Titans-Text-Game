@@ -25,12 +25,15 @@ public class Main extends Application
 	private TextPane txt = new TextPane();
 	private Timeline mainLoopCheck;
 	
-	public static int currentRoom = 1;
-	private TestRoom currentRoomObject;
+	public static String currentRoom = "M1";
+	//private TestRoom currentRoomObject;
+	private Room currentRoomObject;
 	
 	private static String displayText = "";
 	
-	private ArrayList<TestRoom> rooms = new ArrayList<TestRoom>();
+	//private ArrayList<TestRoom> rooms = new ArrayList<TestRoom>();
+	
+	private ArrayList<Room> rooms = new ArrayList<Room>();
 	
 	public void start(Stage primaryStage)
 	{
@@ -44,11 +47,14 @@ public class Main extends Application
 		
 		for (int i = 1; i < 5; i++)
 		{
-			TestRoom tempRoom = new TestRoom(i);
-			rooms.add(tempRoom);
+			//TestRoom tempRoom = new TestRoom(i);
+			//Room tempRoom = new Room(i);
+			//rooms.add(tempRoom);
 		}
 		
 		//setRoom(currentRoom);
+		
+		RoomControl rc = new RoomControl(rooms);
 		
 		mainLoopCheck = new Timeline(
 				new KeyFrame(Duration.millis(5), e -> mainLoop()));
@@ -143,7 +149,7 @@ public class Main extends Application
 		
 	}
 	
-	private void setRoom(int newRoom)
+	private void setRoom(String newRoom)
 	{
 		currentRoom = newRoom;
 		getObject();
@@ -152,7 +158,7 @@ public class Main extends Application
 	
 	private void getObject()
 	{
-		for (TestRoom r : rooms)
+		for (Room r : rooms)
 		{
 			if (r.getID() == currentRoom)
 			{
@@ -185,22 +191,21 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("north"))
 		{
-			if (currentRoomObject.getNextRoom(0) > -1)
+			if (currentRoomObject.getNorth() != null)
 			{
-				setRoom(currentRoomObject.getNextRoom(0));
+				setRoom(currentRoomObject.getNorth().getID());
 			}
 			else
 			{
 				display(nothing);
-				//display("1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 ");
 			}
 		}
 		
 		if (tempInput.toLowerCase().contains("east"))
 		{
-			if (currentRoomObject.getNextRoom(1) > -1)
+			if (currentRoomObject.getEast() != null)
 			{
-				setRoom(currentRoomObject.getNextRoom(1));
+				setRoom(currentRoomObject.getEast().getID());
 			}
 			else
 			{
@@ -210,9 +215,9 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("south"))
 		{
-			if (currentRoomObject.getNextRoom(2) > -1)
+			if (currentRoomObject.getSouth() != null)
 			{
-				setRoom(currentRoomObject.getNextRoom(2));
+				setRoom(currentRoomObject.getSouth().getID());
 			}
 			else
 			{
@@ -222,9 +227,9 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("west"))
 		{
-			if (currentRoomObject.getNextRoom(3) > -1)
+			if (currentRoomObject.getWest() != null)
 			{
-				setRoom(currentRoomObject.getNextRoom(3));
+				setRoom(currentRoomObject.getWest().getID());
 			}
 			else
 			{
