@@ -1,3 +1,4 @@
+package talesOfTitans;
 import java.util.ArrayList;
 
 /**Class: 
@@ -26,7 +27,7 @@ public class RoomControl
 	//Room descriptions
 	String[] description = 
 		{"You are at the end of a damp cave. Small shimmers of light creep in from high above. A passage leads to the east.",
-		 "You are a dark and cramped tunnel. Piles of soot covered earth and block your path, but you can make out a crawlspace to the north.",
+		 "You are at a dark and cramped tunnel. Piles of soot covered earth and block your path, but you can make out a crawlspace to the north.",
 		 "You are in the channel of a mine shaft. The torches lining the walls are just bright enough to illuminate the area. The channel continues to the west. A crawl space lies to the south.",
 		 "You are surrounded with the veins of excavated minerals. A light shimmers further to the east. The channel continues to the west.",
 		 "You are at the entrance of a mine shaft. A wooden door overgrown with Ivy and brambles lies to the north. The shaft forks into southern and western corridors.",
