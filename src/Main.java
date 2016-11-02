@@ -84,7 +84,8 @@ public class Main extends Application
 		
 		if (!txt.getInput().equals(""))
 		{
-			parseText();
+			parseText(txt.getInput());
+			txt.resetInput();
 		}
 		
 		while (countLines(displayText) > 15)
@@ -167,10 +168,9 @@ public class Main extends Application
 		}
 	}
 	
-	private void parseText()
+	private void parseText(String input)
 	{
-		String tempInput = txt.getInput();
-		txt.resetInput();
+		String tempInput = input;
 		
 		if (!tempInput.equals(""))
 		{
