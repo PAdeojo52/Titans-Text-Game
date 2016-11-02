@@ -22,6 +22,8 @@ public class Item {
 	private String description;
 
 	private int itemID;
+	
+	
 
 	public String getName() {
 		return name;
@@ -53,6 +55,8 @@ public class Item {
 
 	/*
 	 * The item Id should be pulled from the ArrayList
+	 * Perhaps create a compare loop to pull the ID of 
+	 * an item that matches the name we are looking for.
 	 */
 	public void setItemID(int itemID) {
 		this.itemID = itemID;
@@ -69,5 +73,11 @@ public class Item {
 	 */
 	public void pickUpItem(Item obj) {
 		items.add(obj);
+	}
+	
+	public void useItem(boolean usable, int id){
+		if(usable){//if true, it means available 
+			//Then it should be 
+		}
 	}
 }
