@@ -10,6 +10,8 @@
 
 import java.util.ArrayList;
 
+import Room.Room;
+import Room.RoomControl;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
@@ -112,11 +114,11 @@ public class Main extends Application
 	{
 		String newString = cropString;
 		
-		for (int i = 0; i < newString.length() - 50; i++)
+		for (int i = 1; i < newString.length() - 50; i++)
 		{
-			if (newString.substring(i, i+2).contains("\n"))
+			if (!newString.substring(i-1, i+1).contains("\n"))
 			{
-				if (!newString.substring(i + 2, i + 48).contains("\n"))
+				if (!newString.substring(i, i + 50).contains("\n"))
 				{
 					int lastSpace = newString.substring(i + 2, i + 50).lastIndexOf(" ") + i + 2;
 					
