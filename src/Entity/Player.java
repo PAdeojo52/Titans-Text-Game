@@ -25,58 +25,92 @@ public class Player extends Entity
 {
 	private int gold;
 	private List<Item> invetory;
+	private List<Item> equipment;
 	
 	
-	
-
-	public void move()
+	//Creates a constructor for the player class
+	public Player()
 	{
-		//RoomID + 1
-		//Hopefully the room ID will be linear as to not make it to confusing
+		gold = 0;
 	}
+
+	//Allows the player to move through room
+	//Moved to main subsystem
+//	public void move()
+//	{
+//		//RoomID + 1
+//		//Hopefully the room ID will be linear as to not make it to confusing
+//	}
 	
-	public void use(Usable useItem)
+	//If the item in the inv is a potion, it is considered usable.
+	//Will allow for user to drink potion
+	public void useItems(Usable useItem)
 	{
 		//Will enact the potion
+		
+		useItem.use();
 	}
 	
-	public void equip(Item  newWeapon) 
+	//allows the player to equip an item in the enventory.
+	public void equipItems(Item  newWeapon) 
 	{
-		
+		//Checks to see if inv contains the weapon
+		if(invetory.contains(newWeapon) )
+		{
+			//Sends it to equipement
+			equipment.add(newWeapon);
+		}
+		else if(!invetory.contains(newWeapon))
+		{
+			//Else it tells you do not have it
+			System.out.println("You do not currently have this item in your inventory");
+		}
 
+		
 	}
 
-	public void get(Item  newItem) 
+	//Places item into the users inventory
+	public void getItems(Item  newItem) 
 	{
-		
+		//adds item into your inventory
 		invetory.add(newItem);
+		
+		System.out.println(newItem.getName()
+				+ "Has been added to your inventory");
 
 	}
-
-	public void buy(Item  newItem) 
+	
+//Allows the user to buy items
+	public void buyItems(Item  newItem) 
 	{
-		
+		//checks players gold to see if there is enough of the amount needed
 		if(gold - newItem.getPrice()>=0)
 		{
+			//if there is it is add to the iventort
 			invetory.add(newItem);
 			System.out.println("The item has been purchased");
 		}
 		else
 		{
+			//if not return this message
 			System.out.println("Insufficient Funds");
 		}
 		
 		
 
 	}
+	//Moved to main subsystem
 //Cannot be done without the rest of the subsystems.
-	public void retreat() 
+	/*public void retreat() 
 	{
 		
 		
 	}
-
-	public void look(Rooms  roomID)
+*/
+	
+	//Commented this out for now.
+	//May not need to be implemented
+	/*public void look(Rooms  roomID)
 	{
 
 	}
@@ -91,6 +125,15 @@ public class Player extends Entity
 		
 		//returns the examine 
 
+	}*/
+	
+	public void death(int healthPoints)
+	{
+		if(healthPoints<=0)
+		{
+			System.out.println("Game Over. You have died!");
+		}
+		
 	}
 
 }
