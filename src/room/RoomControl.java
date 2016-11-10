@@ -25,21 +25,21 @@ public class RoomControl
 	{
 		"You are at the end of a damp cave. Small shimmers of light creep in from high above. A passage leads to the east.",
 			"You are a dark and cramped tunnel. Piles of soot covered earth and block your path, but you can make out a crawlspace to the north.",
-		"You are in the channel of a mine shaft. The torches lining the walls are just bright enough to illuminate the area. The channel continues to the west. A crawl space lies to the south.",
+		"You are in the channel of a mine shaft. The torches lining the walls are just bright enough to illuminate the area. The channel continues to the east. A crawl space lies to the south.",
 	 		"You are surrounded with the veins of excavated minerals. A light shimmers further to the east. The channel continues to the west.",
 		 "You are at the entrance of a mine shaft. A wooden door overgrown with Ivy and brambles lies to the north. The shaft forks into southern and western corridors.",
-			"The shaft continues to the south. The mineâ€™s entrance can be seen to the north.",
+			"The shaft continues to the south. The mine's entrance can be seen to the north.",
 		 "You stumble in the darkness. It is too dark to continue without a light.",
-			"The shaft makes a sharp turn to the east.",
+			"The shaft makes a sharp turn to the east. You feel a light breeze coming from the north.",
 		 "The shaft comes to a stop. The air is stagnant and hot.",
-			"The Inn should allow the player to take a rest for the night for a small number of gold coins. The Inn should also sell cheap food that can be eaten to recover health. The Inn should be run with an Innkeeper that the player has to interact with the Innkeeper in order to buy food or a night at the Inn.",
-	 	"This shop is run by an old alchemist who spends his free time creating magic potions with different attributes.",
-		 	"The Forge is run by a master blacksmith(Siegfried) and his apprentice(Roots). The blacksmith is a master at his work so he does not deal with customers because he is too busy making the finest swords in Athena. Roots does all of the business as he has a silver tongue that can barter up any trader.",
+			"Upon entering the Athena you come across an Inn. You enter and can see, and smell, that the Innkeep maintains a small restauraunt. You notice that there are vacancies.",
+	 	"Continuing through the city you find an alchemy shop. You enter to examine it's wares.",
+	 		"Before leaving the Athena you stop by the town forge which is run by the master blacksmith Siegfried. As you enter his apprentice, Roots, welcomes you. You ask to see their inventory and are surprised to learn that they don't keep much on hand, almost everything is made specifically for the customer by Siegfried himself, but they do have a few things.",
 		"You are in a wooded area surrounding a mine. A dusty path continues to the east. To the south lies the mine entrance.",
 	 		"You are on a footpath in a dense forest. You can hear the sound of rushing water to the east.",
 	 	"A River flows eastbound alongside the trail.",
 		 	"A great lake lies at the end of the trail. A clearing in the forest lies to the south.",
-		"An ornate stone roadway cuts eastward through the forest. A nearby sign reads â€œNORTH: Lake Durnam. EAST: Athenaâ€�",
+		"An ornate stone roadway cuts eastward through the forest. A nearby sign reads \"NORTH: Lake Durnam. EAST: Athena\"",
 	 		"You are on the outskirts of a great city. A guard stands at his post, preventing all from entering.",
 		"A great tower can be seen rising from the eastern horizon.",
 		 	"There is a small clearing in the forest towards the Tower of Babel with a pitch black statue in the middle.",
@@ -50,9 +50,9 @@ public class RoomControl
 		"You are halfway up the staircase. Chamber rooms lie to the east and west.",
 	 		"You find yourself in a what appears to be an observatory west of the central staircase.",
 	 	"You enter the eastern chamber. Shelves of ancient tomes line the walls. Each book is written in a strange language completely foreign to you. The central staircase lies to the west.",
-		 	"You have reached the top of the tower. A massive door of granite lies directly to the north. Youâ€™re sure you can see shadows dancing from under the cracks of the door.",
+		 	"You have reached the top of the tower. A massive door of granite lies directly to the north. You're sure you can see shadows dancing from under the cracks of the door.",
 		"You find yourself in what appears to be an observatory overlooking the city. A map of the surrounding area is pinned to the far wall. Several markings are etched onto the map, mysteriously coinciding with the places you have been. The central staircase lies to the east.",
-	 		"You enter an expansive armoury crowded with row upon row of weapons and armors. The dust-coated armors, though neglected, shows no sign of deterioration.Unfortunately, these armaments were clearly designed for someone much larger than yourself. The central staircase lies to the east.",
+	 		"You enter an expansive armoury crowded with row upon row of weapons and armors. The dust-coated armors, though neglected, shows no sign of deterioration. Unfortunately, these armaments were clearly designed for someone much larger than yourself. The central staircase lies to the west.",
 	 	"You cautiously proceed onward through the massive doorway and find yourself in what is likely the final room in the tower. An array of banners, weathered by time, encompass an ornate throne in the center of the chamber. Atop the throne sits Briarios, King of Darkness. Sparing no time, he rises from his throne and prepares for battle."
 	};
 	//Room shop flags
@@ -185,8 +185,7 @@ public class RoomControl
 		currentRoom = roomArray[0];
 		
 		//TODO change for final version
-		System.out.println(currentRoom.getID() + "\n" + currentRoom.getDescription() +
-				"\nThe shop status is: " + currentRoom.getIsShop());
+		System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
 		
 		//TODO add monsters, puzzles, and items
 	}
@@ -197,7 +196,6 @@ public class RoomControl
 	  * All other input results in an error being thrown. Input is not case sensitive. Upon valid input,
 	  * and the room located in the desired direction not being null, the method reassigns the
 	  * currentRoom to the one specified and displays its description.
-	  * TODO revisit this upon completion
 	  * @param userInput
 	  * @return moves
 	  */
@@ -209,8 +207,6 @@ public class RoomControl
 			if(currentRoom.getNorth() != null)
 			{
 				currentRoom = currentRoom.getNorth();
-				System.out.println(currentRoom.getID() + "\n" + currentRoom.getDescription() +
-						"\nThe shop status is: " + currentRoom.getIsShop());
 			}
 			else
 			{
@@ -222,8 +218,6 @@ public class RoomControl
 			if(currentRoom.getSouth() != null)
 			{
 				currentRoom = currentRoom.getSouth();
-				System.out.println(currentRoom.getID() + "\n" + currentRoom.getDescription() +
-						"\nThe shop status is: " + currentRoom.getIsShop());
 			}
 			else
 			{
@@ -235,8 +229,6 @@ public class RoomControl
 			if(currentRoom.getEast() != null)
 			{
 				currentRoom = currentRoom.getEast();
-				System.out.println(currentRoom.getID() + "\n" + currentRoom.getDescription() +
-						"\nThe shop status is: " + currentRoom.getIsShop());
 			}
 			else
 			{
@@ -248,8 +240,6 @@ public class RoomControl
 			if(currentRoom.getWest() != null)
 			{
 				currentRoom = currentRoom.getWest();
-				System.out.println(currentRoom.getID() + "\n" + currentRoom.getDescription() +
-						"\nThe shop status is: " + currentRoom.getIsShop());
 			}
 			else
 			{
@@ -260,6 +250,18 @@ public class RoomControl
 		{
 			System.out.println("Unexpected input");
 		}
+		//TODO
+		//if(!currentRoom.getID().equals("M7") ||
+		  //(currentRoom.getID().equals("M7") && !player.getInv().contains("torch")))
+		{
+			System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
+		}
+		/*
+		 * else
+		 * {
+		 * 		System.out.println("-- With the torch you are able to see deeper into the shaft. It looks like the southern part of this mine experienced a small cave-in, which explains all of the debris that you were tripping on earlier.");
+		 * }
+		 */
 		
 		return currentRoom.getID();
 	}
