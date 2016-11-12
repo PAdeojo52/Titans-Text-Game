@@ -97,7 +97,7 @@ public class RoomControl
 			-1,
 			-1,
 			-1,
-			8
+			7
 			
 		};
 	

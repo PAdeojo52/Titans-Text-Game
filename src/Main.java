@@ -157,6 +157,11 @@ public class Main extends Application
 		currentRoom = newRoom;
 		getObject();
 		display(currentRoomObject.getDescription());
+		
+		if (currentRoomObject.getMonster() != null)
+		{
+			display(currentRoomObject.getMonster().getDescription());
+		}
 	}
 	
 	private void getObject()

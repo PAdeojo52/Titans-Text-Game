@@ -178,9 +178,14 @@ public class Room //TODO extends DescribedObject
 	/**
 	  * Setter method for the room's Monster
 	  * @param mon
-	  *//*
+	  */
 	public void setMonster(Monster mon)
 	{
 		monster = mon;
-	}*/
+	}
+	
+	public Monster getMonster()
+	{
+		return monster;
+	}
 }
