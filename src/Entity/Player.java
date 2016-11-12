@@ -24,8 +24,6 @@ import Inventory.*;
 public class Player extends Entity
 {
 	private int gold;
-	private List<Item> invetory;
-	private List<Item> equipment;
 	
 	
 	//Creates a constructor for the player class

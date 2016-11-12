@@ -11,9 +11,11 @@
   * 		   references to possible surrounding rooms, Monsters, and Puzzles.
   */
 
-package room;
+package Room;
 
 import java.util.ArrayList;
+
+import Entity.Monster;
 
 public class Room //TODO extends DescribedObject
 {
@@ -23,18 +25,19 @@ public class Room //TODO extends DescribedObject
 	private ArrayList inv = new ArrayList(); //TODO Set ArrayList type to Item
 	private Room north = null, south = null, east = null, west = null;
 	private Puzzle puzzle = null;
-	//TODO private Monster monster = null;
+	private Monster monster = null;
 	
 	/**
 	  * This is the Constructor for the Room class. The Constructor accepts a String for the roomID
 	  * and description, and sets the corresponding class variables to them, as well as a boolean for
 	  * the Room's isShop flag, who's class variable is also set.
 	  */
-	public Room(String ID, String description, boolean shop)
+	public Room(String ID, String description, boolean shop, Monster mon)
 	{
 		roomID = ID;
 		this.description = description;
 		isShop = shop;
+		monster = mon;
 	}
 	
 	/**

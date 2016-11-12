@@ -1,5 +1,6 @@
 package Entity;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -21,8 +22,10 @@ import java.util.Random;
 public class Entity
 {
 	//Attributes
-	private int health;
-	private int strength;
+	protected int health;
+	protected int strength;
+	//protected List<Item> inventory;
+	//protected Item equipment;
 	//Construct
 	public Entity()
 	{
@@ -60,6 +63,11 @@ public class Entity
 	//methods
 	public void attack(Entity target)
 	{
+		int attackPower = strength;
+		
+		target.setHealth(target.getHealth() - attackPower);
+		
+		/*
 		//Players intial strenth
 		int playerCurrentStrenth = getStrength();
 
@@ -115,7 +123,7 @@ public class Entity
 		else
 		{
 			System.out.println("The attack has missed");
-		}
+		}*/
 
 
 

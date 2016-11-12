@@ -1,4 +1,4 @@
-package talesOfTitans;
+//package talesOfTitans;
 
 import java.util.Scanner;
 

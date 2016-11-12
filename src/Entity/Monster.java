@@ -12,16 +12,76 @@ public class Monster extends Entity
 
 	private int aggressiveness;
 	
+	private String[] names =
+		{
+			"Wraith",
+			"Slime",
+			"Goblin",
+			"Orc",
+			"Giant",
+			"Ent",
+			"Mercenary",
+			"Briarios"
+		};
+	
+	private String[] descriptions =
+		{
+			"-- The wraith floats in the air. Your attacks seem to do nothing.",
+			"-- A gooey slime stands in your path.",
+			"-- The goblin holds a battle axe.",
+			"-- The orc holds a sword and a shield.",
+			"-- The giant is minding his own business. Maybe he'll leave you alone if you leave him alone.",
+			"-- A giant tree monster.",
+			"-- The mercenary is fast and wields two swords.",
+			"-- Briarios himself. You must defeat him!"
+		};
+	
+	private int[] strengths = 
+		{
+			10,
+			1,
+			4,
+			5,
+			9,
+			7,
+			6,
+			9
+		};
+	
+	private int[] hps =
+		{
+			9999,
+			5,
+			10,
+			15,
+			50,
+			45,
+			30,
+			100
+		};
+	
+	private int[] aggros =
+		{
+			50,
+			50,
+			75,
+			75,
+			0,
+			20,
+			100,
+			100
+		};
+	
 	
 	//monster cobstructor
-	public Monster(int monID,String monName, String monDescription, int monAggressivness)
+	public Monster(int monID)
 	{
-		monID = this.monsterID;
-		monName = this.name;
-		monDescription = this.description;
-		monAggressivness = this.aggressiveness;
-		
-		
+		monsterID = monID;
+		name = names[monID];
+		health = hps[monID];
+		strength = strengths[monID];
+		aggressiveness = aggros[monID];
+		description = descriptions[monID];
 	}
 
 	//gets the name

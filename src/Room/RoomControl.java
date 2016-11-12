@@ -8,7 +8,11 @@
   * Purpose: - The RoomControl class creates the instances of the Room class that will be used in the
   * 		   TalesOfTitans game.
   */
-package room;
+package Room;
+
+import java.util.ArrayList;
+
+import Entity.Monster;
 
 public class RoomControl
 {
@@ -61,18 +65,67 @@ public class RoomControl
 								false, false, false, false, false, false, false, false, false, false,
 								false};
 	
+	private int[] monsters =
+		{
+			-1,
+			1,
+			-1,
+			2,
+			1,
+			3,
+			2,
+			-1,
+			6,
+			-1,
+			-1,
+			-1,
+			5,
+			2,
+			1,
+			4,
+			3,
+			-1,
+			5,
+			-1,
+			0,
+			-1,
+			1,
+			3,
+			1,
+			2,
+			4,
+			-1,
+			-1,
+			-1,
+			8
+			
+		};
+	
 	/**
 	  * This method is the RoomControl Constructor. It's purpose is to populate the rooms in the
 	  * roomArray with an ID, description, and shop flag, and to link the rooms together. The
 	  * Constructor also assigns Monsters and Puzzles to the rooms, as well as Items to the rooms
 	  * inventories.  
 	  */
-	public RoomControl()
+	public RoomControl(ArrayList<Room> rooms)
 	{
+
+		for (int i = 0; i < description.length; i++)
+		{
+			description[i] = "-- " + description[i];
+		}
 		//Populate roomArray
 		for(byte index = 0; index < ID.length; index++)
 		{
-			roomArray[index] = new Room(ID[index], description[index], isShop[index]);
+			Monster mon = null;
+			
+			if (monsters[index] > -1)
+			{
+				mon = new Monster(monsters[index]);
+			}
+			
+			roomArray[index] = new Room(ID[index], description[index], isShop[index], mon);
+			rooms.add(roomArray[index]);
 		}
 		//Link rooms
 		//Mine Area
@@ -185,7 +238,7 @@ public class RoomControl
 		currentRoom = roomArray[0];
 		
 		//TODO change for final version
-		System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
+		//System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
 		
 		//TODO add monsters, puzzles, and items
 	}
