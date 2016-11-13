@@ -1,0 +1,17 @@
+Item Name,ID,Health Increase,Increase Strength,Wealth
+Sword Plus,E4,0,10 up,0
+Spear Plus,E5,0,10 up,0
+Bow Plus,E6,0,10 up,0
+Sword,E1,0,5 up,0
+Spear,E2,0,5 up,0
+Silver Dagger,I2,0,,0
+Bow,E3,0,5 up,0
+Gold Coins,I7,0,0,X up
+Gold Coin,I7,0,0,1 up
+Torches,I4,0,0,0
+Torch,I4,0,0,0
+Human Skull,I3,0,0,0
+Shop,Room ID,0,0,0
+Potion,I6,50 up,0,0
+Shining Key,I1,0,0,0
+Sunstone,I5,0,0,0
