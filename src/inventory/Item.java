@@ -21,8 +21,24 @@ public class Item {
 
 	private String description;
 
-	private int itemID;
+	private String itemID;
 	
+	private String[] itemIDs = 
+		{
+			"I1",
+			"I2",
+			"I3",
+			"I4",
+			"I5",
+			"I6",
+			"I7",
+			"E1",
+			"E2",
+			"E3",
+			"E4",
+			"E5",
+			"E6"
+		};
 	
 
 	public String getName() {
@@ -49,7 +65,7 @@ public class Item {
 		this.description = description;
 	}
 
-	public int getItemID() {
+	public String getItemID() {
 		return itemID;
 	}
 
@@ -58,7 +74,7 @@ public class Item {
 	 * Perhaps create a compare loop to pull the ID of 
 	 * an item that matches the name we are looking for.
 	 */
-	public void setItemID(int itemID) {
+	public void setItemID(String itemID) {
 		this.itemID = itemID;
 	}
 

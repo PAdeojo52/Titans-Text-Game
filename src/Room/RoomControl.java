@@ -10,7 +10,10 @@
   */
 package Room;
 
+import inventory.Weapon;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Entity.Monster;
 
@@ -73,7 +76,7 @@ public class RoomControl
 			2,
 			1,
 			3,
-			2,
+			-1,
 			-1,
 			6,
 			-1,
@@ -101,6 +104,24 @@ public class RoomControl
 			
 		};
 	
+	private String[] itemRooms =
+		{
+			"M1",
+			"M3",
+			"M7",
+			"C2",
+			"C3"
+		};
+	
+	private String[] items =
+		{
+			"E1,E2,E3",
+			"I4",
+			"I3",
+			"I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6",
+			"E4,E5,E6"
+		};
+	
 	/**
 	  * This method is the RoomControl Constructor. It's purpose is to populate the rooms in the
 	  * roomArray with an ID, description, and shop flag, and to link the rooms together. The
@@ -125,6 +146,35 @@ public class RoomControl
 			}
 			
 			roomArray[index] = new Room(ID[index], description[index], isShop[index], mon);
+			
+			if (Arrays.asList(itemRooms).contains(ID[index]))
+			{
+				int itemRoomsIndex = 0;
+				
+				for (int i = 0; i < itemRooms.length; i++)
+				{
+					if (itemRooms[i].equals(ID[index]))
+					{
+						itemRoomsIndex = i;
+					}
+				}
+				
+				String[] separatedItems = items[itemRoomsIndex].split(",");
+				
+				for (int i = 0; i < separatedItems.length; i++)
+				{
+					if (separatedItems[i].contains("E"))
+					{
+						Weapon tempWeapon = new Weapon(Integer.parseInt(separatedItems[i].substring(1)));
+						roomArray[index].addInv(tempWeapon);
+					}
+					else if (separatedItems[i].contains("I"))
+					{
+						
+					}
+				}
+			}
+			
 			rooms.add(roomArray[index]);
 		}
 		//Link rooms

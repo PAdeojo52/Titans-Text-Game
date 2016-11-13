@@ -10,8 +10,19 @@ public class Weapon extends Item {
 
 	private String[] combatVerbs;
 
-	private ArrayList<Weapon> weapons;
-
+	private String[] names =
+		{
+			"Blank", "Sword", "Spear", "Bow", "Sword +", "Spear +", "Bow +"
+		};
+	
+	private int[] strengths = {5, 5, 5, 5, 10, 10, 10};
+	
+	public Weapon(int wepNum)
+	{
+		super.setName(names[wepNum]);
+		strength = strengths[wepNum];
+	}
+	
 	public int getStrength() {
 		return strength;
 	}
@@ -34,26 +45,6 @@ public class Weapon extends Item {
 
 	public void setCombatVerbs(String[] combatVerbs) {
 		this.combatVerbs = combatVerbs;
-	}
-
-	public void addWeapon(Weapon weap) {
-		weapons.add(weap);
-	}
-
-	/*
-	 * In battle if the player decides to 'pick up' a weapon that is available
-	 * then this method could be called. and it adds it to the weapons array.
-	 * three types of weapons: bow (1), spear(2), sword (3).
-	 */
-	public void pickUpItem(Weapon weap) {
-		weapons.add(weap);
-	}
-
-	public String pickUpWeapon(String str) {
-		if (TextPane.getInput.equals("Pick up") || TextPane.getInput.equals("pick up")
-				|| TextPane.getInput.equals("Pickup") || TextPane.getInput.equals("pickup")) {
-			pickUpItem(weapon);
-		}
 	}
 
 }

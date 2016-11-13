@@ -9,6 +9,8 @@ package Main;
   * Purpose: - 
   */
 
+import inventory.Item;
+
 import java.util.ArrayList;
 
 import Entity.Player;
@@ -64,7 +66,7 @@ public class Main extends Application
 		if (displayText.equals("") && currentRoomObject != null)
 		{
 			setRoom(currentRoom);
-			displayText = currentRoomObject.getDescription();
+			//displayText = currentRoomObject.getDescription();
 		}
 		
 		getObject();
@@ -134,11 +136,6 @@ public class Main extends Application
 		return numLines;
 	}
 	
-	private void makeRooms()
-	{
-		
-	}
-	
 	private void look()
 	{
 		display(currentRoomObject.getDescription());
@@ -146,6 +143,15 @@ public class Main extends Application
 		if (currentRoomObject.getMonster() != null)
 		{
 			display(currentRoomObject.getMonster().getDescription());
+		}
+		
+		if (currentRoomObject.getInv().size() > 0)
+		{
+			display("-- Items you can see");
+			for (int i = 0; i < currentRoomObject.getInv().size(); i++)
+			{
+				display("- " + currentRoomObject.getInv().get(i).getName());
+			}
 		}
 	}
 	
@@ -162,6 +168,15 @@ public class Main extends Application
 			if (Math.random() * 100 < currentRoomObject.getMonster().getAggressiveness())
 			{
 				currentRoomObject.getMonster().attack(player);
+			}
+		}
+		
+		if (currentRoomObject.getInv().size() > 0)
+		{
+			display("-- Items you can see");
+			for (int i = 0; i < currentRoomObject.getInv().size(); i++)
+			{
+				display("- " + currentRoomObject.getInv().get(i).getName());
 			}
 		}
 	}
@@ -282,12 +297,54 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("help") && !recognized)
 		{
-			display("Try these commands: "
-					+ "\n North/South/East/West "
-					+ "\n Look"
-					+ "\n Attack"
-					+ "\n Get (item)"
-					+ "\n Buy (item)");
+			display("-- Try these commands: "
+					+ "\n - North/South/East/West "
+					+ "\n - Look"
+					+ "\n - Attack"
+					+ "\n - Get (item)"
+					+ "\n - Buy (item)"
+					+ "\n - Inventory");
+			
+			recognized = true;
+		}
+		
+		if (tempInput.toLowerCase().contains("get") && !recognized)
+		{
+			int startIndex = tempInput.toLowerCase().indexOf("get") + 4;
+			
+			String getItemName = tempInput.toLowerCase().substring(startIndex);
+			
+			boolean itemGotten = false;
+			
+			ArrayList<Item> currentInv = currentRoomObject.getInv();
+			
+			if (currentInv.size() > 0)
+			{
+				for (int i = 0; i < currentInv.size(); i++)
+				{
+					if (currentInv.get(i).getName().toLowerCase().equals(getItemName))
+					{
+						display("-- Got " + currentInv.get(i).getName());
+						player.getItem(currentInv.get(i));
+						currentInv.remove(i);
+					}
+				}
+			}
+			
+			recognized = true;
+		}
+		
+		if ((tempInput.toLowerCase().contains("inventory")
+				|| tempInput.toLowerCase().equals("inv")
+				|| tempInput.toLowerCase().equals("i"))
+				&& !recognized)
+		{
+			display("-- Inventory");
+			
+			for (int i = 0; i < player.getInv().size(); i++)
+			{
+				display("- " + player.getInv().get(i).getName());
+			}
 			
 			recognized = true;
 		}

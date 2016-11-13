@@ -1,5 +1,9 @@
 package Entity;
 
+import inventory.Item;
+import inventory.Weapon;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,13 +31,13 @@ public class Entity
 	protected int health;
 	protected int strength;
 	protected String name;
-	//protected List<Item> inventory;
-	//protected Item equipment;
+	protected ArrayList<Item> inventory = new ArrayList<Item>();
+	protected Weapon equipment;
 	//Construct
 	public Entity()
 	{
 		this.health = 100;
-		this.strength = 4;
+		this.strength = 3;
 	}
 
 	//getters and setters
@@ -67,7 +71,11 @@ public class Entity
 		return name;
 	}
 
-
+	public ArrayList<Item> getInv()
+	{
+		return inventory;
+	}
+	
 	//methods
 	public void attack(Entity target)
 	{
@@ -80,7 +88,7 @@ public class Entity
 			target.setHealth(0);
 		}
 		
-		Main.display("-- " + name + " deals " + attackPower + " damage! " + target.getName() + " health is now " + target.getHealth() + "!");
+		Main.display("-- " + name + " deals " + attackPower + " damage! " + target.getName() + "'s health is now " + target.getHealth() + "!");
 		
 		/*
 		//Players intial strenth

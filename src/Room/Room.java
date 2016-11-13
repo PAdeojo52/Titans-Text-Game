@@ -13,6 +13,8 @@
 
 package Room;
 
+import inventory.Item;
+
 import java.util.ArrayList;
 
 import Entity.Monster;
@@ -23,7 +25,7 @@ public class Room //TODO extends DescribedObject
 
 	private boolean isShop;
 	private String description, roomID;
-	private ArrayList inv = new ArrayList(); //TODO Set ArrayList type to Item
+	private ArrayList<Item> inv = new ArrayList(); //TODO Set ArrayList type to Item
 	private Room north = null, south = null, east = null, west = null;
 	private Puzzle puzzle = null;
 	private Monster monster = null;
@@ -78,7 +80,7 @@ public class Room //TODO extends DescribedObject
 	  * Getter method for inv
 	  * @return inv
 	  */
-	public ArrayList getInv()
+	public ArrayList<Item> getInv()
 	{
 		return inv;
 	}
@@ -87,7 +89,7 @@ public class Room //TODO extends DescribedObject
 	  * This method allows outside objects to add Items to the room's inventory
 	  * @param newItem
 	  */
-	public void addInv(Object newItem) //TODO Change Object to Item
+	public void addInv(Item newItem) //TODO Change Object to Item
 	{
 		inv.add(newItem);
 	}
@@ -96,7 +98,7 @@ public class Room //TODO extends DescribedObject
 	  * This method allows outside objects to remove Items from the room's inventory
 	  * @param item
 	  */
-	public void removeInv(Object item) //TODO Change Object to Item
+	public void removeInv(Item item) //TODO Change Object to Item
 	{
 		inv.remove(item);
 	}

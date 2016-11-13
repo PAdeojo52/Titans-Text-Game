@@ -1,4 +1,6 @@
 package Entity;
+import inventory.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,18 +74,14 @@ public class Player extends Entity
 	}
 	*/
 
-	/*
+	
 	//Places item into the users inventory
-	public void getItems(Item  newItem) 
+	public void getItem(Item newItem) 
 	{
 		//adds item into your inventory
-		invetory.add(newItem);
-		
-		System.out.println(newItem.getName()
-				+ "Has been added to your inventory");
-
+		inventory.add(newItem);
 	}
-	*/
+	
 	
 	/*
 	//Allows the user to buy items
