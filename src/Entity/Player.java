@@ -138,7 +138,15 @@ public class Player extends Entity
 		{
 			System.out.println("Game Over. You have died!");
 		}
-		
+	}
+	
+	public int getGold()
+	{
+		return gold;
 	}
 
+	public void addGold()
+	{
+		gold++;
+	}
 }

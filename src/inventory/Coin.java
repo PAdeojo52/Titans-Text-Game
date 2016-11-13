@@ -2,8 +2,13 @@ package inventory;
 
 public class Coin extends Item {
 
-	private int value;
+	private int value = 1;
 
+	public Coin()
+	{
+		super.setName("Gold coin");
+	}
+	
 	public int getValue() {
 		return value;
 	}

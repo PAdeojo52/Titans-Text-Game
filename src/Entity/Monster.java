@@ -1,5 +1,8 @@
 package Entity ;
 
+import inventory.Coin;
+import inventory.Usable;
+
 public class Monster extends Entity 
 
 {
@@ -20,6 +23,18 @@ public class Monster extends Entity
 			"Ent",
 			"Mercenary",
 			"Briarios"
+		};
+	
+	private String[] heldItems =
+		{
+			"I1",
+			"G1",
+			"G1",
+			"G1",
+			"G1",
+			"G1",
+			"G1",
+			"G1"
 		};
 	
 	private String[] descriptions =
@@ -80,6 +95,17 @@ public class Monster extends Entity
 		strength = strengths[monID];
 		aggressiveness = aggros[monID];
 		description = descriptions[monID];
+		
+		if (heldItems[monID].equals("I1"))
+		{
+			Usable newItem = new Usable(1);
+			addItem(newItem);
+		}
+		else
+		{
+			Coin newCoin = new Coin();
+			addItem(newCoin);
+		}
 	}
 
 	//gets the name

@@ -2,17 +2,25 @@ package inventory;
 
 public class Usable extends Item {
 
-	private int healthRecov;
-	private boolean usable;
+	private int healthRecov = 0;
 
-	public boolean isUsable() {
-		return usable;
+	private String[] names =
+		{
+			"Blank",
+			"Shining Key",
+			"Silver Dagger",
+			"Human Skull",
+			"Torch",
+			"Sunstone",
+			"Potion"
+		};
+	
+	public Usable(int useNum)
+	{
+		super.setName(names[useNum]);
+		if (useNum == 6) healthRecov = 50;
 	}
-
-	public void setUsable(boolean usable) {
-		this.usable = usable;
-	}
-
+	
 	public int getHealthRecov() {
 		return healthRecov;
 	}
@@ -20,17 +28,4 @@ public class Usable extends Item {
 	public void setHealthRecov(int healthRecov) {
 		this.healthRecov = healthRecov;
 	}
-	
-	// if something is available, the it should be usable.
-		public boolean isUsable1(){
-			if (items.size() > 0) {
-				return true;
-
-			}
-			else
-				return false;
-		}
-
-	
-
 }

@@ -18,6 +18,7 @@ import inventory.Item;
 import java.util.ArrayList;
 
 import Entity.Monster;
+import Entity.Player;
 import Main.Main;
 
 public class Room //TODO extends DescribedObject
@@ -43,9 +44,10 @@ public class Room //TODO extends DescribedObject
 		monster = mon;
 	}
 	
-	public void killMonster()
+	public void killMonster(Player player)
 	{
 		Main.display("-- Killed " + monster.getName() + "!");
+		player.getItem(monster.getInv().get(0));
 		monster = null;
 	}
 	

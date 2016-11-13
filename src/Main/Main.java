@@ -9,9 +9,11 @@ package Main;
   * Purpose: - 
   */
 
+import inventory.Coin;
 import inventory.Item;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import Entity.Player;
 import Room.Room;
@@ -67,6 +69,19 @@ public class Main extends Application
 		{
 			setRoom(currentRoom);
 			//displayText = currentRoomObject.getDescription();
+		}
+		
+		Iterator<Item> i = player.getInv().iterator();
+		
+		while(i.hasNext())
+		{
+			Item i2 = i.next();
+			
+			if (i2 instanceof Coin)
+			{
+				player.addGold();
+				i.remove();
+			}
 		}
 		
 		getObject();
@@ -198,15 +213,6 @@ public class Main extends Application
 		
 		boolean recognized = false;
 		
-		if (!tempInput.equals(""))
-		{
-			//txt.changeText(tempInput);
-		}
-		else
-		{
-			//txt.changeText("Blarg");
-		}
-		
 		if (tempInput.toLowerCase().contains("attack") && !recognized)
 		{
 			if (currentRoomObject.getMonster() != null)
@@ -219,7 +225,7 @@ public class Main extends Application
 				}
 				else
 				{
-					currentRoomObject.killMonster();
+					currentRoomObject.killMonster(player);
 				}
 			}
 			else
@@ -303,6 +309,7 @@ public class Main extends Application
 					+ "\n - Attack"
 					+ "\n - Get (item)"
 					+ "\n - Buy (item)"
+					+ "\n - Use (item)"
 					+ "\n - Inventory");
 			
 			recognized = true;
@@ -318,7 +325,7 @@ public class Main extends Application
 			
 			ArrayList<Item> currentInv = currentRoomObject.getInv();
 			
-			if (currentInv.size() > 0)
+			if (currentInv.size() > 0 && !currentRoomObject.getIsShop())
 			{
 				for (int i = 0; i < currentInv.size(); i++)
 				{
@@ -327,8 +334,15 @@ public class Main extends Application
 						display("-- Got " + currentInv.get(i).getName());
 						player.getItem(currentInv.get(i));
 						currentInv.remove(i);
+						
+						itemGotten = true;
 					}
 				}
+			}
+			
+			if (!itemGotten)
+			{
+				display("No item to get");
 			}
 			
 			recognized = true;
@@ -340,6 +354,7 @@ public class Main extends Application
 				&& !recognized)
 		{
 			display("-- Inventory");
+			display("- " + player.getGold() + " gold");
 			
 			for (int i = 0; i < player.getInv().size(); i++)
 			{
