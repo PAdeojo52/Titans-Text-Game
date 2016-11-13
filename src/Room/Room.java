@@ -16,6 +16,7 @@ package Room;
 import java.util.ArrayList;
 
 import Entity.Monster;
+import Main.Main;
 
 public class Room //TODO extends DescribedObject
 {
@@ -38,6 +39,12 @@ public class Room //TODO extends DescribedObject
 		this.description = description;
 		isShop = shop;
 		monster = mon;
+	}
+	
+	public void killMonster()
+	{
+		Main.display("-- Killed " + monster.getName() + "!");
+		monster = null;
 	}
 	
 	/**

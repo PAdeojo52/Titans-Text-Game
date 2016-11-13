@@ -6,8 +6,6 @@ public class Monster extends Entity
 	//Basic Attributes
 	private int monsterID;
 	
-	private String name;
-	
 	private String description;
 
 	private int aggressiveness;

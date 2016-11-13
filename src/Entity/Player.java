@@ -1,7 +1,7 @@
 package Entity;
 import java.util.ArrayList;
 import java.util.List;
-import Inventory.*;
+
 /**
  * Class: Player.java
  * 
@@ -30,6 +30,7 @@ public class Player extends Entity
 	public Player()
 	{
 		gold = 0;
+		name = "Player";
 	}
 
 	//Allows the player to move through room
@@ -42,13 +43,16 @@ public class Player extends Entity
 	
 	//If the item in the inv is a potion, it is considered usable.
 	//Will allow for user to drink potion
+	/*
 	public void useItems(Usable useItem)
 	{
 		//Will enact the potion
 		
 		useItem.use();
 	}
+	*/
 	
+	/*
 	//allows the player to equip an item in the enventory.
 	public void equipItems(Item  newWeapon) 
 	{
@@ -66,7 +70,9 @@ public class Player extends Entity
 
 		
 	}
+	*/
 
+	/*
 	//Places item into the users inventory
 	public void getItems(Item  newItem) 
 	{
@@ -77,8 +83,10 @@ public class Player extends Entity
 				+ "Has been added to your inventory");
 
 	}
+	*/
 	
-//Allows the user to buy items
+	/*
+	//Allows the user to buy items
 	public void buyItems(Item  newItem) 
 	{
 		//checks players gold to see if there is enough of the amount needed
@@ -97,6 +105,7 @@ public class Player extends Entity
 		
 
 	}
+	*/
 	//Moved to main subsystem
 //Cannot be done without the rest of the subsystems.
 	/*public void retreat() 

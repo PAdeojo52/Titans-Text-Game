@@ -1,3 +1,4 @@
+package Main;
 /**Class: 
   * @author Kevin Stevens
   * @version 1.0
@@ -10,6 +11,7 @@
 
 import java.util.ArrayList;
 
+import Entity.Player;
 import Room.Room;
 import Room.RoomControl;
 import javafx.scene.Scene;
@@ -28,12 +30,12 @@ public class Main extends Application
 	private Timeline mainLoopCheck;
 	
 	public static String currentRoom = "M1";
-	//private TestRoom currentRoomObject;
+
 	private Room currentRoomObject;
 	
-	private static String displayText = "";
+	private Player player = new Player();
 	
-	//private ArrayList<TestRoom> rooms = new ArrayList<TestRoom>();
+	private static String displayText = "";
 	
 	private ArrayList<Room> rooms = new ArrayList<Room>();
 	
@@ -46,15 +48,6 @@ public class Main extends Application
 		
 		txt.setStyle("-fx-background-color: black");
 		txt.requestFocus();
-		
-		for (int i = 1; i < 5; i++)
-		{
-			//TestRoom tempRoom = new TestRoom(i);
-			//Room tempRoom = new Room(i);
-			//rooms.add(tempRoom);
-		}
-		
-		//setRoom(currentRoom);
 		
 		RoomControl rc = new RoomControl(rooms);
 		
@@ -72,15 +65,9 @@ public class Main extends Application
 		{
 			setRoom(currentRoom);
 			displayText = currentRoomObject.getDescription();
-			//displayText = "1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 1234 56789 ";
 		}
 		
 		getObject();
-		
-		if (currentRoomObject != null && !txt.getInput().equals(""))
-		{
-			//displayText = displayText + (currentRoomObject.getDescription());
-		}
 		
 		if (displayText.length() > 0) displayText = cropText(displayText);
 		
@@ -152,6 +139,16 @@ public class Main extends Application
 		
 	}
 	
+	private void look()
+	{
+		display(currentRoomObject.getDescription());
+		
+		if (currentRoomObject.getMonster() != null)
+		{
+			display(currentRoomObject.getMonster().getDescription());
+		}
+	}
+	
 	private void setRoom(String newRoom)
 	{
 		currentRoom = newRoom;
@@ -161,6 +158,11 @@ public class Main extends Application
 		if (currentRoomObject.getMonster() != null)
 		{
 			display(currentRoomObject.getMonster().getDescription());
+			
+			if (Math.random() * 100 < currentRoomObject.getMonster().getAggressiveness())
+			{
+				currentRoomObject.getMonster().attack(player);
+			}
 		}
 	}
 	
@@ -179,6 +181,8 @@ public class Main extends Application
 	{
 		String tempInput = input;
 		
+		boolean recognized = false;
+		
 		if (!tempInput.equals(""))
 		{
 			//txt.changeText(tempInput);
@@ -188,15 +192,32 @@ public class Main extends Application
 			//txt.changeText("Blarg");
 		}
 		
-		if (tempInput.toLowerCase().contains("attack"))
+		if (tempInput.toLowerCase().contains("attack") && !recognized)
 		{
-			//String[] tempStrings = tempInput.split(" ");
-			//txt.changeText(tempStrings[1]);
+			if (currentRoomObject.getMonster() != null)
+			{
+				player.attack(currentRoomObject.getMonster());
+				
+				if (currentRoomObject.getMonster().getHealth() > 0)
+				{
+					currentRoomObject.getMonster().attack(player);
+				}
+				else
+				{
+					currentRoomObject.killMonster();
+				}
+			}
+			else
+			{
+				display("-- There is nothing to attack.");
+			}
+			
+			recognized = true;
 		}
 		
-		String nothing = "There is nothing in that direction.";
+		String nothing = "-- There is nothing in that direction.";
 		
-		if (tempInput.toLowerCase().contains("north"))
+		if (tempInput.toLowerCase().contains("north") && !recognized)
 		{
 			if (currentRoomObject.getNorth() != null)
 			{
@@ -206,9 +227,11 @@ public class Main extends Application
 			{
 				display(nothing);
 			}
+			
+			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("east"))
+		if (tempInput.toLowerCase().contains("east") && !recognized)
 		{
 			if (currentRoomObject.getEast() != null)
 			{
@@ -218,9 +241,11 @@ public class Main extends Application
 			{
 				display(nothing);
 			}
+			
+			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("south"))
+		if (tempInput.toLowerCase().contains("south") && !recognized)
 		{
 			if (currentRoomObject.getSouth() != null)
 			{
@@ -230,9 +255,11 @@ public class Main extends Application
 			{
 				display(nothing);
 			}
+			
+			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("west"))
+		if (tempInput.toLowerCase().contains("west") && !recognized)
 		{
 			if (currentRoomObject.getWest() != null)
 			{
@@ -242,6 +269,32 @@ public class Main extends Application
 			{
 				display(nothing);
 			}
+			
+			recognized = true;
+		}
+		
+		if (tempInput.toLowerCase().contains("look") && !recognized)
+		{
+			look();
+			
+			recognized = true;
+		}
+		
+		if (tempInput.toLowerCase().contains("help") && !recognized)
+		{
+			display("Try these commands: "
+					+ "\n North/South/East/West "
+					+ "\n Look"
+					+ "\n Attack"
+					+ "\n Get (item)"
+					+ "\n Buy (item)");
+			
+			recognized = true;
+		}
+		
+		if (!recognized)
+		{
+			display("-- Command not recognized.");
 		}
 	}
 }

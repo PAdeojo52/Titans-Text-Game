@@ -3,6 +3,8 @@ package Entity;
 import java.util.List;
 import java.util.Random;
 
+import Main.Main;
+
 /**
  * Class: Entity.java
  * 
@@ -24,6 +26,7 @@ public class Entity
 	//Attributes
 	protected int health;
 	protected int strength;
+	protected String name;
 	//protected List<Item> inventory;
 	//protected Item equipment;
 	//Construct
@@ -58,6 +61,11 @@ public class Entity
 	{
 		this.strength = strength;
 	}
+	
+	public String getName()
+	{
+		return name;
+	}
 
 
 	//methods
@@ -66,6 +74,13 @@ public class Entity
 		int attackPower = strength;
 		
 		target.setHealth(target.getHealth() - attackPower);
+		
+		if (target.getHealth() < 0)
+		{
+			target.setHealth(0);
+		}
+		
+		Main.display("-- " + name + " deals " + attackPower + " damage! " + target.getName() + " health is now " + target.getHealth() + "!");
 		
 		/*
 		//Players intial strenth
