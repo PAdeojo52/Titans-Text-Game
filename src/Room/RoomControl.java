@@ -10,6 +10,7 @@
   */
 package Room;
 
+import inventory.Usable;
 import inventory.Weapon;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import Entity.Monster;
 
 public class RoomControl
 {
-	PuzzleControl pc = new PuzzleControl();
+	//PuzzleControl pc = new PuzzleControl();
 	//Holds the room that the player is currently in
 	private Room currentRoom;
 	//Array of all the rooms in the game
@@ -170,9 +171,18 @@ public class RoomControl
 					}
 					else if (separatedItems[i].contains("I"))
 					{
-						
+						Usable tempUsable = new Usable(Integer.parseInt(separatedItems[i].substring(1)));
+						roomArray[index].addInv(tempUsable);
 					}
 				}
+			}
+			
+			if (ID[index].equals("M7"))
+			{
+				ItemPuzzle newItemPuzzle = new ItemPuzzle(roomArray[index], "M7", "torch");
+				newItemPuzzle.setLocked(2, true);
+				newItemPuzzle.setSolutionText("-- The torch lights up the cave. You can see exits to the north and the south.");
+				roomArray[index].setPuzzle(newItemPuzzle);
 			}
 			
 			rooms.add(roomArray[index]);
@@ -187,7 +197,7 @@ public class RoomControl
 		//M3
 		roomArray[2].setSouth(roomArray[1]);
 		roomArray[2].setEast(roomArray[3]);
-		roomArray[2].setPuzzle(pc.getPuzzleArray()[4]);
+		//roomArray[2].setPuzzle(pc.getPuzzleArray()[4]);
 		//M4
 		roomArray[3].setWest(roomArray[2]);
 		roomArray[3].setEast(roomArray[4]);
@@ -201,13 +211,13 @@ public class RoomControl
 		//M7
 		roomArray[6].setNorth(roomArray[5]);
 		roomArray[6].setSouth(roomArray[7]);
-		roomArray[6].setPuzzle(pc.getPuzzleArray()[7]);
+		//roomArray[6].setPuzzle(pc.getPuzzleArray()[7]);
 		//M8
 		roomArray[7].setNorth(roomArray[6]);
 		roomArray[7].setEast(roomArray[8]);
 		//M9
 		roomArray[8].setWest(roomArray[7]);
-		roomArray[8].setPuzzle(pc.getPuzzleArray()[5]);
+		//roomArray[8].setPuzzle(pc.getPuzzleArray()[5]);
 		
 		//Forest Area
 		//F1
@@ -228,14 +238,14 @@ public class RoomControl
 		//F6
 		roomArray[17].setWest(roomArray[16]);
 		roomArray[17].setEast(roomArray[9]);
-		roomArray[17].setPuzzle(pc.getPuzzleArray()[6]);
+		//roomArray[17].setPuzzle(pc.getPuzzleArray()[6]);
 		//F7
 		roomArray[18].setWest(roomArray[10]);
 		roomArray[18].setEast(roomArray[19]);
 		//F8
 		roomArray[19].setWest(roomArray[18]);
 		roomArray[19].setEast(roomArray[20]);
-		roomArray[19].setPuzzle(pc.getPuzzleArray()[1]);
+		//roomArray[19].setPuzzle(pc.getPuzzleArray()[1]);
 		//F9
 		roomArray[20].setWest(roomArray[19]);
 		roomArray[20].setEast(roomArray[21]);
@@ -244,14 +254,14 @@ public class RoomControl
 		//C1
 		roomArray[9].setWest(roomArray[17]);
 		roomArray[9].setEast(roomArray[10]);
-		roomArray[9].setPuzzle(pc.getPuzzleArray()[2]);
+		//roomArray[9].setPuzzle(pc.getPuzzleArray()[2]);
 		//C2
 		roomArray[10].setWest(roomArray[9]);
 		roomArray[10].setNorth(roomArray[11]);
 		roomArray[10].setEast(roomArray[18]);
 		//C3
 		roomArray[11].setSouth(roomArray[10]);
-		roomArray[11].setPuzzle(pc.getPuzzleArray()[3]);
+		//roomArray[11].setPuzzle(pc.getPuzzleArray()[3]);
 		
 		//Tower Area
 		//T1

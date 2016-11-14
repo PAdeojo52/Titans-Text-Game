@@ -30,6 +30,7 @@ public class Room //TODO extends DescribedObject
 	private Room north = null, south = null, east = null, west = null;
 	private Puzzle puzzle = null;
 	private Monster monster = null;
+	private boolean[] locked = {false, false, false, false};
 	
 	/**
 	  * This is the Constructor for the Room class. The Constructor accepts a String for the roomID
@@ -186,6 +187,11 @@ public class Room //TODO extends DescribedObject
 		this.puzzle = puzzle;
 	}
 	
+	public Puzzle getPuzzle()
+	{
+		return puzzle;
+	}
+	
 	/**
 	  * Setter method for the room's Monster
 	  * @param mon
@@ -198,5 +204,15 @@ public class Room //TODO extends DescribedObject
 	public Monster getMonster()
 	{
 		return monster;
+	}
+	
+	public boolean getLocked(int dir)
+	{
+		return locked[dir];
+	}
+	
+	public void setLocked(int dir, boolean isLocked)
+	{
+		locked[dir] = isLocked;
 	}
 }

@@ -11,17 +11,17 @@ package Main;
 
 import inventory.Coin;
 import inventory.Item;
+import inventory.Usable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import Entity.Player;
+import Room.ItemPuzzle;
+import Room.Riddle;
 import Room.Room;
 import Room.RoomControl;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -59,6 +59,9 @@ public class Main extends Application
 				new KeyFrame(Duration.millis(5), e -> mainLoop()));
 		mainLoopCheck.setCycleCount(Timeline.INDEFINITE);
 		mainLoopCheck.play();
+		
+		Usable newPotion = new Usable(6);
+		player.getItem(newPotion);
 	}
 	
 	public void mainLoop()
@@ -168,6 +171,11 @@ public class Main extends Application
 				display("- " + currentRoomObject.getInv().get(i).getName());
 			}
 		}
+		
+		display(currentRoomObject.getLocked(0) + "");
+		display(currentRoomObject.getLocked(1) + "");
+		display(currentRoomObject.getLocked(2) + "");
+		display(currentRoomObject.getLocked(3) + "");
 	}
 	
 	private void setRoom(String newRoom)
@@ -236,11 +244,11 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		String nothing = "-- There is nothing in that direction.";
+		String nothing = "-- Can't go that direction.";
 		
 		if (tempInput.toLowerCase().contains("north") && !recognized)
 		{
-			if (currentRoomObject.getNorth() != null)
+			if (currentRoomObject.getNorth() != null && !currentRoomObject.getLocked(0))
 			{
 				setRoom(currentRoomObject.getNorth().getID());
 			}
@@ -254,7 +262,7 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("east") && !recognized)
 		{
-			if (currentRoomObject.getEast() != null)
+			if (currentRoomObject.getEast() != null && !currentRoomObject.getLocked(1))
 			{
 				setRoom(currentRoomObject.getEast().getID());
 			}
@@ -268,7 +276,7 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("south") && !recognized)
 		{
-			if (currentRoomObject.getSouth() != null)
+			if (currentRoomObject.getSouth() != null && !currentRoomObject.getLocked(2))
 			{
 				setRoom(currentRoomObject.getSouth().getID());
 			}
@@ -282,7 +290,7 @@ public class Main extends Application
 		
 		if (tempInput.toLowerCase().contains("west") && !recognized)
 		{
-			if (currentRoomObject.getWest() != null)
+			if (currentRoomObject.getWest() != null && !currentRoomObject.getLocked(3))
 			{
 				setRoom(currentRoomObject.getWest().getID());
 			}
@@ -364,9 +372,76 @@ public class Main extends Application
 			recognized = true;
 		}
 		
+		if (tempInput.toLowerCase().contains("use ") && !recognized)
+		{
+			String useItem = tempInput.toLowerCase().substring(4);
+			
+			boolean itemUsed = false;
+			boolean inInventory = false;
+			
+			Iterator<Item> i = player.getInv().iterator();
+			
+			while(i.hasNext() && !itemUsed)
+			{
+				Item i2 = i.next();
+				
+				if (i2 instanceof Usable && i2.getName().toLowerCase().equals(useItem))
+				{
+					Usable i3 = (Usable) i2;
+					
+					if (i3.getHealthRecov() > 0)
+					{
+						player.heal(i3.getHealthRecov());
+						i.remove();
+						itemUsed = true;
+					}
+					
+					if (currentRoomObject.getPuzzle() != null
+							&& currentRoomObject.getPuzzle() instanceof ItemPuzzle)
+					{
+						ItemPuzzle ip = (ItemPuzzle) currentRoomObject.getPuzzle();
+						
+						if (i3.getName().toLowerCase().equals(ip.getSolutionName().toLowerCase()))
+						{
+							ip.setSolved();
+							itemUsed = true;
+						}
+					}
+					
+					inInventory = true;
+				}
+			}
+			
+			if (!inInventory)
+			{
+				display("-- Item name not recognized.");
+			}
+			else if (inInventory && !itemUsed)
+			{
+				display("-- Cannot use that item right now.");
+			}
+			
+			recognized = true;
+		}
+		
 		if (!recognized)
 		{
-			display("-- Command not recognized.");
+			if (currentRoomObject.getPuzzle() != null
+					&& currentRoomObject.getPuzzle() instanceof Riddle)
+			{
+				Riddle r = (Riddle) currentRoomObject.getPuzzle();
+				
+				if (tempInput.toLowerCase().equals(r.getSolution()))
+				{
+					r.setSolved();
+					recognized = true;
+				}
+			}
+			
+			if (!recognized)
+			{
+				display("-- Command not recognized.");
+			}
 		}
 	}
 }

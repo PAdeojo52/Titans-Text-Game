@@ -4,6 +4,8 @@ import inventory.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import Main.Main;
+
 /**
  * Class: Player.java
  * 
@@ -35,25 +37,6 @@ public class Player extends Entity
 		name = "Player";
 	}
 
-	//Allows the player to move through room
-	//Moved to main subsystem
-//	public void move()
-//	{
-//		//RoomID + 1
-//		//Hopefully the room ID will be linear as to not make it to confusing
-//	}
-	
-	//If the item in the inv is a potion, it is considered usable.
-	//Will allow for user to drink potion
-	/*
-	public void useItems(Usable useItem)
-	{
-		//Will enact the potion
-		
-		useItem.use();
-	}
-	*/
-	
 	/*
 	//allows the player to equip an item in the enventory.
 	public void equipItems(Item  newWeapon) 
@@ -82,56 +65,6 @@ public class Player extends Entity
 		inventory.add(newItem);
 	}
 	
-	
-	/*
-	//Allows the user to buy items
-	public void buyItems(Item  newItem) 
-	{
-		//checks players gold to see if there is enough of the amount needed
-		if(gold - newItem.getPrice()>=0)
-		{
-			//if there is it is add to the iventort
-			invetory.add(newItem);
-			System.out.println("The item has been purchased");
-		}
-		else
-		{
-			//if not return this message
-			System.out.println("Insufficient Funds");
-		}
-		
-		
-
-	}
-	*/
-	//Moved to main subsystem
-//Cannot be done without the rest of the subsystems.
-	/*public void retreat() 
-	{
-		
-		
-	}
-*/
-	
-	//Commented this out for now.
-	//May not need to be implemented
-	/*public void look(Rooms  roomID)
-	{
-
-	}
-
-	public void examine(Rooms puzzleID) 
-	{
-
-	}
-
-	public void examine(Entity monster) 
-	{
-		
-		//returns the examine 
-
-	}*/
-	
 	public void death(int healthPoints)
 	{
 		if(healthPoints<=0)
@@ -148,5 +81,14 @@ public class Player extends Entity
 	public void addGold()
 	{
 		gold++;
+	}
+	
+	public void heal(int healAmount)
+	{
+		super.setHealth(super.getHealth() + healAmount);
+		
+		if (super.getHealth() > 100) super.setHealth(100);
+		
+		Main.display("-- Healed. Health is now " + super.getHealth());
 	}
 }
