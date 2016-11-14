@@ -1,4 +1,4 @@
-package Main;
+package main;
 /**Class: 
   * @author Kevin Stevens
   * @version 1.0
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Entity.Player;
-import Room.ItemPuzzle;
-import Room.Riddle;
-import Room.Room;
-import Room.RoomControl;
+import room.ItemPuzzle;
+import room.Riddle;
+import room.Room;
+import room.RoomControl;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -246,7 +246,9 @@ public class Main extends Application
 		
 		String nothing = "-- Can't go that direction.";
 		
-		if (tempInput.toLowerCase().contains("north") && !recognized)
+		if ((tempInput.toLowerCase().contains("north")
+				|| tempInput.equalsIgnoreCase("n"))
+				&& !recognized)
 		{
 			if (currentRoomObject.getNorth() != null && !currentRoomObject.getLocked(0))
 			{
@@ -260,7 +262,9 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("east") && !recognized)
+		if ((tempInput.toLowerCase().contains("east")
+				|| tempInput.equalsIgnoreCase("e"))
+				&& !recognized)
 		{
 			if (currentRoomObject.getEast() != null && !currentRoomObject.getLocked(1))
 			{
@@ -274,7 +278,9 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("south") && !recognized)
+		if ((tempInput.toLowerCase().contains("south") 
+				|| tempInput.equalsIgnoreCase("s"))
+				&& !recognized)
 		{
 			if (currentRoomObject.getSouth() != null && !currentRoomObject.getLocked(2))
 			{
@@ -288,7 +294,9 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("west") && !recognized)
+		if ((tempInput.toLowerCase().contains("west") 
+				|| tempInput.equalsIgnoreCase("w"))
+				&& !recognized)
 		{
 			if (currentRoomObject.getWest() != null && !currentRoomObject.getLocked(3))
 			{
