@@ -37,32 +37,29 @@ public class Player extends Entity
 		name = "Player";
 	}
 
-	/*
-	//allows the player to equip an item in the enventory.
-	public void equipItems(Item  newWeapon) 
-	{
-		//Checks to see if inv contains the weapon
-		if(invetory.contains(newWeapon) )
-		{
-			//Sends it to equipement
-			equipment.add(newWeapon);
-		}
-		else if(!invetory.contains(newWeapon))
-		{
-			//Else it tells you do not have it
-			System.out.println("You do not currently have this item in your inventory");
-		}
 
-		
-	}
-	*/
-
-	
 	//Places item into the users inventory
 	public void getItem(Item newItem) 
 	{
 		//adds item into your inventory
 		inventory.add(newItem);
+		Main.display("-- Got " + newItem.getName());
+	}
+	
+	public boolean buyItem(Item newItem)
+	{
+		if (gold >= newItem.getPrice())
+		{
+			gold -= newItem.getPrice();
+			inventory.add(newItem);
+			Main.display("-- Bought " + newItem.getName());
+			return true;
+		}
+		else
+		{
+			Main.display("-- Can't afford that!");
+			return false;
+		}
 	}
 	
 	public void death(int healthPoints)

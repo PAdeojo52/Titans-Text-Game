@@ -81,10 +81,20 @@ public class Entity
 		inventory.add(newItem);
 	}
 	
+	public void setEquipment(Weapon newWeapon)
+	{
+		equipment = newWeapon;
+	}
+	
 	//methods
 	public void attack(Entity target)
 	{
 		int attackPower = strength;
+		
+		if (equipment != null)
+		{
+			attackPower += equipment.getStrength();
+		}
 		
 		target.setHealth(target.getHealth() - attackPower);
 		

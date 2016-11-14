@@ -12,6 +12,7 @@ package Main;
 import inventory.Coin;
 import inventory.Item;
 import inventory.Usable;
+import inventory.Weapon;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,7 +34,7 @@ public class Main extends Application
 	private TextPane txt = new TextPane();
 	private Timeline mainLoopCheck;
 	
-	public static String currentRoom = "M1";
+	public static String currentRoom = "C2";
 
 	private Room currentRoomObject;
 	
@@ -166,16 +167,16 @@ public class Main extends Application
 		if (currentRoomObject.getInv().size() > 0)
 		{
 			display("-- Items you can see");
+			
+			String invString = "";
+			
 			for (int i = 0; i < currentRoomObject.getInv().size(); i++)
 			{
-				display("- " + currentRoomObject.getInv().get(i).getName());
+				invString = invString + "- " + currentRoomObject.getInv().get(i).getName() + " ";
 			}
+			
+			display(invString);
 		}
-		
-		display(currentRoomObject.getLocked(0) + "");
-		display(currentRoomObject.getLocked(1) + "");
-		display(currentRoomObject.getLocked(2) + "");
-		display(currentRoomObject.getLocked(3) + "");
 	}
 	
 	private void setRoom(String newRoom)
@@ -318,12 +319,13 @@ public class Main extends Application
 					+ "\n - Get (item)"
 					+ "\n - Buy (item)"
 					+ "\n - Use (item)"
+					+ "\n - Equip (weapon)"
 					+ "\n - Inventory");
 			
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("get") && !recognized)
+		if (tempInput.toLowerCase().contains("get ") && !recognized)
 		{
 			int startIndex = tempInput.toLowerCase().indexOf("get") + 4;
 			
@@ -339,7 +341,6 @@ public class Main extends Application
 				{
 					if (currentInv.get(i).getName().toLowerCase().equals(getItemName))
 					{
-						display("-- Got " + currentInv.get(i).getName());
 						player.getItem(currentInv.get(i));
 						currentInv.remove(i);
 						
@@ -348,9 +349,60 @@ public class Main extends Application
 				}
 			}
 			
-			if (!itemGotten)
+			if (!itemGotten && !currentRoomObject.getIsShop())
 			{
-				display("No item to get");
+				display("-- No item to get");
+			}
+			
+			if (currentRoomObject.getIsShop())
+			{
+				display("-- This is a shop, ya gotta pay for that!");
+			}
+			
+			recognized = true;
+		}
+		
+		if (tempInput.toLowerCase().contains("buy ") && !recognized)
+		{
+			int startIndex = tempInput.toLowerCase().indexOf("buy") + 4;
+			
+			String getItemName = tempInput.toLowerCase().substring(startIndex);
+			
+			boolean itemGotten = false;
+			
+			ArrayList<Item> currentInv = currentRoomObject.getInv();
+			
+			if (currentInv.size() > 0 && currentRoomObject.getIsShop())
+			{
+				boolean itemBought = false;
+				
+				Iterator<Item> i = currentRoomObject.getInv().iterator();
+				
+				while(i.hasNext() && !itemBought)
+				{
+					Item i2 = i.next();
+					
+					if (i2.getName().toLowerCase().equals(getItemName))
+					{
+						
+						if (player.buyItem(i2))
+						{
+							i.remove();
+						}
+						
+						itemBought = true;
+					}
+				}
+			}
+			
+			if (!itemGotten && !currentRoomObject.getIsShop())
+			{
+				display("-- No item to buy.");
+			}
+			
+			if (!currentRoomObject.getIsShop())
+			{
+				display("-- You don't need to pay for that. Just get it.");
 			}
 			
 			recognized = true;
@@ -362,6 +414,7 @@ public class Main extends Application
 				&& !recognized)
 		{
 			display("-- Inventory");
+			display("- Health: " + player.getHealth());
 			display("- " + player.getGold() + " gold");
 			
 			for (int i = 0; i < player.getInv().size(); i++)
@@ -419,6 +472,38 @@ public class Main extends Application
 			else if (inInventory && !itemUsed)
 			{
 				display("-- Cannot use that item right now.");
+			}
+			
+			recognized = true;
+		}
+		
+		if (tempInput.toLowerCase().contains("equip ") && !recognized)
+		{
+			String useItem = tempInput.toLowerCase().substring(6);
+			
+			boolean inInventory = false;
+			
+			Iterator<Item> i = player.getInv().iterator();
+			
+			while(i.hasNext())
+			{
+				Item i2 = i.next();
+				
+				if (i2 instanceof Weapon && i2.getName().toLowerCase().equals(useItem))
+				{
+					Weapon i3 = (Weapon) i2;
+					
+					player.setEquipment(i3);
+					
+					display("-- Equipped " + i3.getName());
+					
+					inInventory = true;
+				}
+			}
+			
+			if (!inInventory)
+			{
+				display("-- Item name not recognized.");
 			}
 			
 			recognized = true;
