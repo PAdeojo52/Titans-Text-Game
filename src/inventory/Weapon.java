@@ -12,15 +12,18 @@ public class Weapon extends Item {
 
 	private String[] names =
 		{
-			"Blank", "Sword", "Spear", "Bow", "Sword +", "Spear +", "Bow +"
+			"Blank", "Sword", "Spear", "Bow", "Sword+", "Spear+", "Bow+"
 		};
 	
 	private int[] strengths = {5, 5, 5, 5, 10, 10, 10};
+	
+	private int[] prices = {0, 0, 0, 0, 7, 7, 7};
 	
 	public Weapon(int wepNum)
 	{
 		super.setName(names[wepNum]);
 		strength = strengths[wepNum];
+		setPrice(prices[wepNum]);
 	}
 	
 	public int getStrength() {

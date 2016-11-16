@@ -18,7 +18,12 @@ public class Usable extends Item {
 	public Usable(int useNum)
 	{
 		super.setName(names[useNum]);
-		if (useNum == 6) healthRecov = 50;
+		
+		if (useNum == 6) 
+			{
+				healthRecov = 50;
+				setPrice(3);
+			}
 	}
 	
 	public int getHealthRecov() {

@@ -1,4 +1,4 @@
-package main;
+package Main;
 /**Class: 
   * @author Kevin Stevens
   * @version 1.0
@@ -18,10 +18,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import Entity.Player;
-import room.ItemPuzzle;
-import room.Riddle;
-import room.Room;
-import room.RoomControl;
+import Room.ItemPuzzle;
+import Room.Riddle;
+import Room.Room;
+import Room.RoomControl;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -34,7 +34,7 @@ public class Main extends Application
 	private TextPane txt = new TextPane();
 	private Timeline mainLoopCheck;
 	
-	public static String currentRoom = "C2";
+	public static String currentRoom = "S1";
 
 	private Room currentRoomObject;
 	
@@ -54,7 +54,19 @@ public class Main extends Application
 		txt.setStyle("-fx-background-color: black");
 		txt.requestFocus();
 		
+		Room mainMenu = new Room("S1",
+				"Welcome to Tales of Titans!\n\nType Start to begin!",
+				false, null);
+		rooms.add(mainMenu);
+		
+		Room deathScreen = new Room("D1",
+				"-- You have died. Game Over.",
+				false, null);
+		rooms.add(deathScreen);
+		
 		RoomControl rc = new RoomControl(rooms);
+		currentRoom = "S1";
+		setRoom(currentRoom);
 		
 		mainLoopCheck = new Timeline(
 				new KeyFrame(Duration.millis(5), e -> mainLoop()));
@@ -62,7 +74,11 @@ public class Main extends Application
 		mainLoopCheck.play();
 		
 		Usable newPotion = new Usable(6);
-		player.getItem(newPotion);
+		player.addItem(newPotion);
+		
+		player.addGold(3);
+		
+		//player.setHealth(1);
 	}
 	
 	public void mainLoop()
@@ -83,7 +99,7 @@ public class Main extends Application
 			
 			if (i2 instanceof Coin)
 			{
-				player.addGold();
+				player.addGold(1);
 				i.remove();
 			}
 		}
@@ -94,13 +110,28 @@ public class Main extends Application
 		
 		if (!txt.getInput().equals(""))
 		{
-			parseText(txt.getInput());
+			if (!currentRoomObject.getID().equals("S1")
+					&& !currentRoomObject.getID().equals("D1"))
+			{
+				parseText(txt.getInput());
+			}
+			else
+			{
+				parseTextStart(txt.getInput());
+			}
+			
 			txt.resetInput();
 		}
 		
 		while (countLines(displayText) > 15)
 		{
 			displayText = displayText.substring(displayText.indexOf("\n") + 1);
+		}
+		
+		if (player.getHealth() < 1 && !currentRoom.equals("D1"))
+		{
+			clearScreen();
+			setRoom("D1");
 		}
 		
 		txt.changeText(displayText);
@@ -116,6 +147,11 @@ public class Main extends Application
 	{
 		displayText = displayText + "\n" + newText;
 		
+	}
+	
+	private void clearScreen()
+	{
+		displayText = "";
 	}
 	
 	private String cropText(String cropString)
@@ -172,7 +208,7 @@ public class Main extends Application
 			
 			for (int i = 0; i < currentRoomObject.getInv().size(); i++)
 			{
-				invString = invString + "- " + currentRoomObject.getInv().get(i).getName() + " ";
+				invString = invString + "-" + currentRoomObject.getInv().get(i).getName() + " ";
 			}
 			
 			display(invString);
@@ -183,24 +219,13 @@ public class Main extends Application
 	{
 		currentRoom = newRoom;
 		getObject();
-		display(currentRoomObject.getDescription());
+		look();
 		
 		if (currentRoomObject.getMonster() != null)
 		{
-			display(currentRoomObject.getMonster().getDescription());
-			
 			if (Math.random() * 100 < currentRoomObject.getMonster().getAggressiveness())
 			{
 				currentRoomObject.getMonster().attack(player);
-			}
-		}
-		
-		if (currentRoomObject.getInv().size() > 0)
-		{
-			display("-- Items you can see");
-			for (int i = 0; i < currentRoomObject.getInv().size(); i++)
-			{
-				display("- " + currentRoomObject.getInv().get(i).getName());
 			}
 		}
 	}
@@ -213,6 +238,16 @@ public class Main extends Application
 			{
 				currentRoomObject = r;
 			}
+		}
+	}
+	
+	private void parseTextStart(String input)
+	{
+		if (input.toLowerCase().equals("start"))
+		{
+			currentRoom = "M1";
+			setRoom(currentRoom);
+			getObject();
 		}
 	}
 	

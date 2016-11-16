@@ -53,8 +53,8 @@ public class Item {
 		return price;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setPrice(int newPrice) {
+		this.price = newPrice;
 	}
 
 	public String getDescription() {

@@ -75,9 +75,9 @@ public class Player extends Entity
 		return gold;
 	}
 
-	public void addGold()
+	public void addGold(int num)
 	{
-		gold++;
+		gold += num;
 	}
 	
 	public void heal(int healAmount)
