@@ -257,7 +257,9 @@ public class Main extends Application
 		
 		boolean recognized = false;
 		
-		if (tempInput.toLowerCase().contains("attack") && !recognized)
+		if ((tempInput.toLowerCase().contains("attack")
+				|| tempInput.equalsIgnoreCase("a"))
+				&& !recognized)
 		{
 			if (currentRoomObject.getMonster() != null)
 			{
@@ -281,6 +283,7 @@ public class Main extends Application
 		}
 		
 		String nothing = "-- Can't go that direction.";
+		String roomLocked = "-- Something is preventing you from going that way.";
 		
 		if ((tempInput.toLowerCase().contains("north")
 				|| tempInput.equalsIgnoreCase("n"))
@@ -289,6 +292,10 @@ public class Main extends Application
 			if (currentRoomObject.getNorth() != null && !currentRoomObject.getLocked(0))
 			{
 				setRoom(currentRoomObject.getNorth().getID());
+			}
+			else if (currentRoomObject.getNorth() != null && currentRoomObject.getLocked(0))
+			{
+				display(roomLocked);
 			}
 			else
 			{
@@ -306,6 +313,10 @@ public class Main extends Application
 			{
 				setRoom(currentRoomObject.getEast().getID());
 			}
+			else if (currentRoomObject.getEast() != null && currentRoomObject.getLocked(1))
+			{
+				display(roomLocked);
+			}
 			else
 			{
 				display(nothing);
@@ -322,6 +333,10 @@ public class Main extends Application
 			{
 				setRoom(currentRoomObject.getSouth().getID());
 			}
+			else if (currentRoomObject.getSouth() != null && currentRoomObject.getLocked(2))
+			{
+				display(roomLocked);
+			}
 			else
 			{
 				display(nothing);
@@ -337,6 +352,10 @@ public class Main extends Application
 			if (currentRoomObject.getWest() != null && !currentRoomObject.getLocked(3))
 			{
 				setRoom(currentRoomObject.getWest().getID());
+			}
+			else if (currentRoomObject.getWest() != null && currentRoomObject.getLocked(3))
+			{
+				display(roomLocked);
 			}
 			else
 			{
