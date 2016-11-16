@@ -387,9 +387,11 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("get ") && !recognized)
+		if ((tempInput.toLowerCase().contains("get ")
+				|| tempInput.toLowerCase().contains("take "))
+				&& !recognized)
 		{
-			int startIndex = tempInput.toLowerCase().indexOf("get") + 4;
+			int startIndex = tempInput.toLowerCase().indexOf(" ") + 1;
 			
 			String getItemName = tempInput.toLowerCase().substring(startIndex);
 			
