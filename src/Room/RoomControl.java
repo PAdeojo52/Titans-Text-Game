@@ -25,103 +25,95 @@ public class RoomControl
 	private Room currentRoom;
 	//Array of all the rooms in the game
 	private Room[] roomArray = new Room[31];
+	//Room IDs
 	private String[] ID = {"M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8", "M9", "C1", "C2", "C3", "F1",
 						   "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "T1", "T2", "T3", "T4", "T5",
 						   "T6", "T7", "T8", "T9", "T10"};
-	//Room descriptions TODO redo descriptions
+	//Room descriptions
 	private String[] description = 
 	{
-		"You are at the end of a damp cave. Small shimmers of light creep in from high above. A passage leads to the east.",
-			"You are a dark and cramped tunnel. Piles of soot covered earth and block your path, but you can make out a crawlspace to the north.",
-		"You are in the channel of a mine shaft. The torches lining the walls are just bright enough to illuminate the area. The channel continues to the east. A crawl space lies to the south.",
-	 		"You are surrounded with the veins of excavated minerals. A light shimmers further to the east. The channel continues to the west.",
-		 "You are at the entrance of a mine shaft. A wooden door overgrown with Ivy and brambles lies to the north. The shaft forks into southern and western corridors.",
-			"The shaft continues to the south. The mine's entrance can be seen to the north.",
-		 "You stumble in the darkness. It is too dark to continue without a light.",
-			"The shaft makes a sharp turn to the east. You feel a light breeze coming from the north.",
-		 "The shaft comes to a stop. The air is stagnant and hot.",
-			"Upon entering the Athena you come across an Inn. You enter and can see, and smell, that the Innkeep maintains a small restauraunt. You notice that there are vacancies.",
-	 	"Continuing through the city you find an alchemy shop. You enter to examine it's wares.",
-	 		"Before leaving the Athena you stop by the town forge which is run by the master blacksmith Siegfried. As you enter his apprentice, Roots, welcomes you. You ask to see their inventory and are surprised to learn that they don't keep much on hand, almost everything is made specifically for the customer by Siegfried himself, but they do have a few things.",
-		"You are in a wooded area surrounding a mine. A dusty path continues to the east. To the south lies the mine entrance.",
-	 		"You are on a footpath in a dense forest. You can hear the sound of rushing water to the east.",
-	 	"A River flows eastbound alongside the trail.",
-		 	"A great lake lies at the end of the trail. A clearing in the forest lies to the south.",
-		"An ornate stone roadway cuts eastward through the forest. A nearby sign reads \"NORTH: Lake Durnam. EAST: Athena\"",
-	 		"You are on the outskirts of a great city. A guard stands at his post, preventing all from entering.",
-		"A great tower can be seen rising from the eastern horizon.",
-		 	"There is a small clearing in the forest towards the Tower of Babel with a pitch black statue in the middle.",
-		"As you approach the Tower of Babel, a Wraith appears holding a shining key. It does not speak but it shrieks as it approaches you slowly.",
-	 		"You stand at the bottom floor of the tower. Behind you to the west lies the exit. A staircase can be seen past an awning to the east.",
-	 	"An enormous spiral staircase extends upwards. The entrance chamber lies to the west. A holding cell lies to the east.",
-		 	"You stand in a decrepit holding cell. The walls are lined with claw marks and other incomprehensible inscriptions. Behind you to the west is the staircase.",
-		"You are halfway up the staircase. Chamber rooms lie to the east and west.",
-	 		"You find yourself in a what appears to be an observatory west of the central staircase.",
-	 	"You enter the eastern chamber. Shelves of ancient tomes line the walls. Each book is written in a strange language completely foreign to you. The central staircase lies to the west.",
-		 	"You have reached the top of the tower. A massive door of granite lies directly to the north. You're sure you can see shadows dancing from under the cracks of the door.",
-		"You find yourself in what appears to be an observatory overlooking the city. A map of the surrounding area is pinned to the far wall. Several markings are etched onto the map, mysteriously coinciding with the places you have been. The central staircase lies to the east.",
-	 		"You enter an expansive armoury crowded with row upon row of weapons and armors. The dust-coated armors, though neglected, shows no sign of deterioration. Unfortunately, these armaments were clearly designed for someone much larger than yourself. The central staircase lies to the west.",
-	 	"You cautiously proceed onward through the massive doorway and find yourself in what is likely the final room in the tower. An array of banners, weathered by time, encompass an ornate throne in the center of the chamber. Atop the throne sits Briarios, King of Darkness. Sparing no time, he rises from his throne and prepares for battle."
+		"-- You are at the end of a damp cave. Small shimmers of light creep in from high above. A passage leads to the east.",
+			"-- You are a dark and cramped tunnel. Piles of soot covered earth and block your path, but you can make out a crawlspace to the north.",
+		"-- You are in the channel of a mine shaft. The torches lining the walls are just bright enough to illuminate the area. The channel continues to the east. A crawl space lies to the south.",
+	 		"-- You are surrounded with the veins of excavated minerals. A light shimmers further to the east. The channel continues to the west.",
+		 "-- You are at the entrance of a mine shaft. A wooden door overgrown with Ivy and brambles lies to the north. The shaft forks into southern and western corridors.",
+			"-- The shaft continues to the south. The mine's entrance can be seen to the north.",
+		 "-- You can't see a thing in this darkness. Continuing in these conditions would be far too dangerous.",
+			"-- The shaft makes a sharp turn to the east. You feel a light breeze coming from the north.",
+		 "-- The shaft comes to a stop. The air is stagnant and hot.",
+			"-- Upon entering the Athena you come across an Inn. You enter and can see, and smell, that the Innkeep maintains a small restauraunt. You notice that there are vacancies.",
+	 	"-- Continuing through the city you find an alchemy shop. You enter to examine it's wares.",
+	 		"-- Before leaving the Athena you stop by the town forge which is run by the master blacksmith Siegfried. As you enter his apprentice, Roots, welcomes you. You ask to see their inventory and are surprised to learn that they don't keep much on hand, almost everything is made specifically for the customer by Siegfried himself, but they do have a few things.",
+		"-- You are in a wooded area surrounding a mine. A dusty path continues to the east. To the south lies the mine entrance.",
+	 		"-- You are on a footpath in a dense forest. You can hear the sound of rushing water to the east.",
+	 	"-- A River flows eastbound alongside the trail.",
+		 	"-- A great lake lies at the end of the trail. A clearing in the forest lies to the south.",
+		"-- An ornate stone roadway cuts eastward through the forest. A nearby sign reads \"NORTH: Lake Durnam. EAST: Athena\"",
+	 		"-- You are on the outskirts of a great city. A guard stands at his post, preventing all from entering.",
+		"-- A great tower can be seen rising from the eastern horizon.",
+		 	"-- There is a small clearing in the forest towards the Tower of Babel with a pitch black statue in the middle.",
+		"-- As you approach the Tower of Babel, a Wraith appears holding a shining key. It does not speak but it shrieks as it approaches you slowly.",
+	 		"-- You stand at the bottom floor of the tower. Behind you to the west lies the exit. A staircase can be seen past an awning to the east.",
+	 	"-- An enormous spiral staircase extends upwards. The entrance chamber lies to the west. A holding cell lies to the east.",
+		 	"-- You stand in a decrepit holding cell. The walls are lined with claw marks and other incomprehensible inscriptions. Behind you to the west is the staircase.",
+		"-- You are halfway up the staircase. Chamber rooms lie to the east and west.",
+	 		"-- You find yourself in a what appears to be an observatory west of the central staircase.",
+	 	"-- You enter the eastern chamber. Shelves of ancient tomes line the walls. Each book is written in a strange language completely foreign to you. The central staircase lies to the west.",
+		 	"-- You have reached the top of the tower. A massive door of granite lies directly to the north. You're sure you can see shadows dancing from under the cracks of the door.",
+		"-- You find yourself in what appears to be an observatory overlooking the city. A map of the surrounding area is pinned to the far wall. Several markings are etched onto the map, mysteriously coinciding with the places you have been. The central staircase lies to the east.",
+	 		"-- You enter an expansive armoury crowded with row upon row of weapons and armors. The dust-coated armors, though neglected, shows no sign of deterioration. Unfortunately, these armaments were clearly designed for someone much larger than yourself. The central staircase lies to the west.",
+	 	"-- You cautiously proceed onward through the massive doorway and find yourself in what is likely the final room in the tower. An array of banners, weathered by time, encompass an ornate throne in the center of the chamber. Atop the throne sits Briarios, King of Darkness. Sparing no time, he rises from his throne and prepares for battle."
 	};
 	//Room shop flags
 	private boolean[] isShop = {false, false, false, false, false, false, false, false, false, true,
 								true, true, false, false, false, false, false, false, false, false,
 								false, false, false, false, false, false, false, false, false, false,
 								false};
-	
 	private int[] monsters =
-		{
-			-1,
-			1,
-			-1,
-			2,
-			1,
-			3,
-			-1,
-			-1,
-			6,
-			-1,
-			-1,
-			-1,
-			5,
-			2,
-			1,
-			4,
-			3,
-			-1,
-			5,
-			-1,
-			0,
-			-1,
-			1,
-			3,
-			1,
-			2,
-			4,
-			-1,
-			-1,
-			-1,
-			7
-			
-		};
+	{
+		-1,
+		1,
+		-1,
+		2,
+		1,
+		3,
+		-1,
+		-1,
+		6,
+		-1,
+		-1,
+		-1,
+		5,
+		2,
+		1,
+		4,
+		3,
+		-1,
+		5,
+		-1,
+		0,
+		-1,
+		1,
+		3,
+		1,
+		2,
+		4,
+		-1,
+		-1,
+		-1,
+		7		
+	};
 	
-	private String[] itemRooms =
-		{
-			"M1",
-			"M3",
-			"M7",
-			"C2",
-			"C3"
-		};
+	private String[] itemRooms = {"M1", "M3", "M7", "C2", "C3"};
 	
 	private String[] items =
-		{
-			"E1,E2,E3",
-			"I4",
-			"I3",
-			"I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6",
-			"E4,E5,E6"
-		};
+	{
+		"E1,E2,E3",
+		"I4",
+		"I3",
+		"I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6",
+		"E4,E5,E6"
+	};
 	
 	/**
 	  * This method is the RoomControl Constructor. It's purpose is to populate the rooms in the
@@ -131,30 +123,25 @@ public class RoomControl
 	  */
 	public RoomControl(ArrayList<Room> rooms)
 	{
-
-		for (int i = 0; i < description.length; i++)
-		{
-			description[i] = "-- " + description[i];
-		}
 		//Populate roomArray
 		for(byte index = 0; index < ID.length; index++)
 		{
 			Monster mon = null;
 			
-			if (monsters[index] > -1)
+			if(monsters[index] > -1)
 			{
 				mon = new Monster(monsters[index]);
 			}
 			
 			roomArray[index] = new Room(ID[index], description[index], isShop[index], mon);
 			
-			if (Arrays.asList(itemRooms).contains(ID[index]))
+			if(Arrays.asList(itemRooms).contains(ID[index]))
 			{
 				int itemRoomsIndex = 0;
 				
-				for (int i = 0; i < itemRooms.length; i++)
+				for(int i = 0; i < itemRooms.length; i++)
 				{
-					if (itemRooms[i].equals(ID[index]))
+					if(itemRooms[i].equals(ID[index]))
 					{
 						itemRoomsIndex = i;
 					}
@@ -162,14 +149,14 @@ public class RoomControl
 				
 				String[] separatedItems = items[itemRoomsIndex].split(",");
 				
-				for (int i = 0; i < separatedItems.length; i++)
+				for(int i = 0; i < separatedItems.length; i++)
 				{
-					if (separatedItems[i].contains("E"))
+					if(separatedItems[i].contains("E"))
 					{
 						Weapon tempWeapon = new Weapon(Integer.parseInt(separatedItems[i].substring(1)));
 						roomArray[index].addInv(tempWeapon);
 					}
-					else if (separatedItems[i].contains("I"))
+					else if(separatedItems[i].contains("I"))
 					{
 						Usable tempUsable = new Usable(Integer.parseInt(separatedItems[i].substring(1)));
 						roomArray[index].addInv(tempUsable);
@@ -177,12 +164,29 @@ public class RoomControl
 				}
 			}
 			
-			if (ID[index].equals("M7"))
+			PuzzleControl pc = new PuzzleControl(roomArray);
+			
+			if(ID[index].equals("M3"))
 			{
-				ItemPuzzle newItemPuzzle = new ItemPuzzle(roomArray[index], "M7", "torch");
+				Riddle newRiddle = (Riddle) pc.getPuzzleArray()[3];
+				newRiddle.setLocked(1, true);
+				newRiddle.setSolutionText("-- You reach in the drawing and feel a lever. You pull the lever and part of the wall to the east moves aside, allowing you to progress further.");
+				roomArray[index].setPuzzle(newRiddle);	
+			}
+			
+			if(ID[index].equals("M7"))
+			{
+				ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[6];
 				newItemPuzzle.setLocked(2, true);
-				newItemPuzzle.setSolutionText("-- The torch lights up the cave. You can see exits to the north and the south.");
+				newItemPuzzle.setSolutionText("-- With the torch you are able to see deeper into the shaft. It looks like the southern part of this mine experienced a small cave-in, which explains all of the debris that you were tripping on earlier.");
 				roomArray[index].setPuzzle(newItemPuzzle);
+			}
+			
+			if(ID[index].equals("M9"))
+			{
+				Riddle newRiddle = (Riddle) pc.getPuzzleArray()[4];
+				newRiddle.setSolutionText("-- You reach in the drawing and feel a lever. You pull the lever and part of the wall to the east moves aside, allowing you to progress further.");
+				roomArray[index].setPuzzle(newRiddle);	
 			}
 			
 			rooms.add(roomArray[index]);
@@ -296,86 +300,5 @@ public class RoomControl
 		
 		//Assign the currentRoom to the first room
 		currentRoom = roomArray[0];
-		
-		//TODO change for final version
-		//System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
-		
-		//TODO add monsters, puzzles, and items
-	}
-	
-	/**
-	  * The move method takes the user's input and uses it to change the instance of the Room class that
-	  * the player currently occupies. Valid inputs are: North or N; South or S; East or E; and West or W.
-	  * All other input results in an error being thrown. Input is not case sensitive. Upon valid input,
-	  * and the room located in the desired direction not being null, the method reassigns the
-	  * currentRoom to the one specified and displays its description.
-	  * @param userInput
-	  * @return moves
-	  */
-	public String move(String userInput)
-	{
-		//Move based on userInput
-		if(userInput.equalsIgnoreCase("North") || userInput.equalsIgnoreCase("N"))
-		{
-			if(currentRoom.getNorth() != null)
-			{
-				currentRoom = currentRoom.getNorth();
-			}
-			else
-			{
-				System.out.println("There is nothing in that direction");
-			}
-		}
-		else if(userInput.equalsIgnoreCase("South") || userInput.equalsIgnoreCase("S"))
-		{
-			if(currentRoom.getSouth() != null)
-			{
-				currentRoom = currentRoom.getSouth();
-			}
-			else
-			{
-				System.out.println("There is nothing in that direction");
-			}
-		}
-		else if(userInput.equalsIgnoreCase("East") || userInput.equalsIgnoreCase("E"))
-		{
-			if(currentRoom.getEast() != null)
-			{
-				currentRoom = currentRoom.getEast();
-			}
-			else
-			{
-				System.out.println("There is nothing in that direction");
-			}
-		}
-		else if(userInput.equalsIgnoreCase("West") || userInput.equalsIgnoreCase("W"))
-		{
-			if(currentRoom.getWest() != null)
-			{
-				currentRoom = currentRoom.getWest();
-			}
-			else
-			{
-				System.out.println("There is nothing in that direction");
-			}
-		}
-		else//Change for final version
-		{
-			System.out.println("Unexpected input");
-		}
-		//TODO
-		//if(!currentRoom.getID().equals("M7") ||
-		  //(currentRoom.getID().equals("M7") && !player.getInv().contains("torch")))
-		{
-			System.out.println(currentRoom.getID() + "\n-- " + currentRoom.getDescription());
-		}
-		/*
-		 * else
-		 * {
-		 * 		System.out.println("-- With the torch you are able to see deeper into the shaft. It looks like the southern part of this mine experienced a small cave-in, which explains all of the debris that you were tripping on earlier.");
-		 * }
-		 */
-		
-		return currentRoom.getID();
 	}
 }

@@ -8,11 +8,17 @@
   * Purpose: - 
   */
 
-package room;
+package Room;
+
+import Entity.Player;
+
 public class PuzzleControl
 {
+	private Player player = new Player();	
+	private Integer playerGold = (Integer) player.getGold();
+	
 	private Puzzle[] puzzleArray = new Puzzle[8];
-	private String[] puzzleID = {"P1", "P2", "P3", "P4", "P5", "P6", "P7"};
+	private String[] puzzleID = {"P1i", "P2i", "P3r", "P4r", "P5r", "P6r", "P7i"};
 	private String[] description = 
 	{
 		"A pitch black statue stands before you with a shape of a dark prince of Daedric descent. The eyes glow red as you look into its face. The statue is holding its hand out in your direction above a fountain of water. A description under the prince says: \"A prince of safe passage if you give the right offering.\"",
@@ -27,7 +33,6 @@ public class PuzzleControl
 	private String[] hint = 
 	{
 		"The prince requires a stone of sunlight that you obtain from a merchant in the city.",
-		//Above is done
 		"You notice Grodd glancing at your coin purse before grabbing his rocks. It's almost as if he's visually weighing it.",
 		"It sounds like the riddle rhymes.",
 		"It looks like there is a lever inside.",
@@ -37,23 +42,34 @@ public class PuzzleControl
 	};
 	private String[] solution = 
 	{
-		"player.getInv().contains('Sunstone');",
-		"player.getGold()",
+		"Sunstone",
+		playerGold.toString(),
 		"Dries",
-		"Reach into the triangle and unlock a hatch that will open the door to the next room",
-		"Sparing the mercenary will make him your friend and he will assist you in the city to obtain a sun stone.",
-		"input.equalsIgnoreCase('Wait')",
-		"player.getInv().contains('Torch');"
+		"Hand",
+		"Kill or Spare",
+		"Wait",
+		"Torch"
 	};
 	
 	/**
+	 * @param roomArray 
 	  * 
 	  */
-	public PuzzleControl()
+	public PuzzleControl(Room[] roomArray)
 	{
+		Room[] puzzleRooms = {roomArray[19], roomArray[9], roomArray[11], roomArray[2], roomArray[8], roomArray[17], roomArray[6]};
+		
 		for(byte index = 0; index < puzzleID.length; index++)
 		{
-			puzzleArray[index] = new Puzzle(puzzleID[index], description[index], hint[index], solution[index]);
+			if(puzzleID[index].contains("i"))
+			{
+				puzzleArray[index] = new ItemPuzzle(puzzleRooms[index], puzzleID[index], solution[index], description[index], hint[index]);
+			}
+			else if(puzzleID[index].contains("r"))
+			{
+				puzzleArray[index] = new Riddle(puzzleRooms[index], puzzleID[index], solution[index], description[index], hint[index]);
+			}
+			
 		}
 	}
 	

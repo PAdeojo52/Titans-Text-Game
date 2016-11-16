@@ -47,7 +47,7 @@ public class Room //TODO extends DescribedObject
 	
 	public void killMonster(Player player)
 	{
-		Main.display("-- Killed " + monster.getName() + "!");
+		Main.display("-- The " + monster.getName() + " has been defeated!");
 		player.getItem(monster.getInv().get(0));
 		monster = null;
 	}
@@ -80,6 +80,15 @@ public class Room //TODO extends DescribedObject
 	}
 	
 	/**
+	  * Setter method for description
+	  * @param description
+	  */
+	public void setDescription(String description)
+	{
+		this.description = description;
+	}
+	
+	/**
 	  * Getter method for inv
 	  * @return inv
 	  */
@@ -92,7 +101,7 @@ public class Room //TODO extends DescribedObject
 	  * This method allows outside objects to add Items to the room's inventory
 	  * @param newItem
 	  */
-	public void addInv(Item newItem) //TODO Change Object to Item
+	public void addInv(Item newItem)
 	{
 		inv.add(newItem);
 	}
@@ -101,7 +110,7 @@ public class Room //TODO extends DescribedObject
 	  * This method allows outside objects to remove Items from the room's inventory
 	  * @param item
 	  */
-	public void removeInv(Item item) //TODO Change Object to Item
+	public void removeInv(Item item)
 	{
 		inv.remove(item);
 	}

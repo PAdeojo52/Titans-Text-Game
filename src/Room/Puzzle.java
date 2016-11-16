@@ -24,12 +24,15 @@ public class Puzzle
 	/**
 	  * TODO
 	  */
-	public Puzzle(Room newRoom, String ID)
+	public Puzzle(Room room, String ID, String solution, String description, String hint)
 	{
+		this.room = room;
 		puzzleID = ID;
+		this.description = description;
+		this.hint = hint;
 		solved = false;
-		room = newRoom;
 	}
+	
 	/**
 	  * TODO
 	  */

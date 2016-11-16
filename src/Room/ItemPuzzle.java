@@ -17,9 +17,9 @@ public class ItemPuzzle extends Puzzle
 	/*
 	 * TODO
 	 */
-	public ItemPuzzle(Room newRoom, String ID, String solution)
+	public ItemPuzzle(Room room, String ID, String solution, String description, String hint)
 	{
-		super(newRoom, ID);
+		super(room, ID, solution, description, hint);
 		solutionName = solution;
 	}
 

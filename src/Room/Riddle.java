@@ -8,22 +8,21 @@
   * Purpose: - 
   */
 
+
 package Room;
 
 public class Riddle extends Puzzle
 {
+	private String solution;
 
-	public Riddle(String puzzleHint, String description, String ID, Object solution)
+	public Riddle(Room room, String ID, String solution, String description, String hint)
 	{
-		super(puzzleHint, description, ID, solution);
+		super(room, ID, solution, description, hint);
+		this.solution = solution;
 	}
 	
-	/*
-	 * TODO
-	 * @Override
-	 */
-	public String getSolution() //Don't think we actually need this
+	public String getSolution()
 	{
-		return (String)super.getSolution();
+		return solution;
 	}
 }
