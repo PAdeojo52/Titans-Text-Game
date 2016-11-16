@@ -19,18 +19,20 @@ public class Puzzle
 	private String solutionText = "Puzzle Solved";
 	private boolean[] locked = {false, false, false, false};
 	private Room room = null;
+	private String solution;
 	//private Object solution, guess;
 	
 	/**
 	  * TODO
 	  */
-	public Puzzle(Room room, String ID, String solution, String description, String hint)
+	public Puzzle(Room room, String ID, String newSolution, String description, String hint)
 	{
 		this.room = room;
 		puzzleID = ID;
 		this.description = description;
 		this.hint = hint;
 		solved = false;
+		solution = newSolution;
 	}
 	
 	/**
@@ -93,5 +95,10 @@ public class Puzzle
 	public void setSolutionText(String newText)
 	{
 		solutionText = newText;
+	}
+	
+	public String getSolution()
+	{
+		return solution;
 	}
 }

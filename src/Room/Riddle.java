@@ -13,16 +13,18 @@ package Room;
 
 public class Riddle extends Puzzle
 {
-	private String solution;
+	//private String solution;
 
 	public Riddle(Room room, String ID, String solution, String description, String hint)
 	{
 		super(room, ID, solution, description, hint);
-		this.solution = solution;
+		//this.solution = solution;
 	}
 	
+	/*
 	public String getSolution()
 	{
 		return solution;
 	}
+	*/
 }

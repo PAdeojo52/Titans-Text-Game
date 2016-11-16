@@ -12,7 +12,7 @@ package Room;
 
 public class ItemPuzzle extends Puzzle
 {
-	private String solutionName;
+	//private String solutionName;
 	
 	/*
 	 * TODO
@@ -20,12 +20,13 @@ public class ItemPuzzle extends Puzzle
 	public ItemPuzzle(Room room, String ID, String solution, String description, String hint)
 	{
 		super(room, ID, solution, description, hint);
-		solutionName = solution;
+		//solutionName = solution;
 	}
-
+	
+	/*
 	public String getSolutionName()
 	{
 		return solutionName;
 	}
-
+	*/
 }

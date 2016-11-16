@@ -78,7 +78,7 @@ public class Main extends Application
 		
 		player.addGold(3);
 		
-		//player.setHealth(1);
+		//player.setHealth(10000);
 	}
 	
 	public void mainLoop()
@@ -198,6 +198,11 @@ public class Main extends Application
 		if (currentRoomObject.getMonster() != null)
 		{
 			display(currentRoomObject.getMonster().getDescription());
+		}
+		
+		if (currentRoomObject.getPuzzle() != null)
+		{
+			display(currentRoomObject.getPuzzle().getDescription());
 		}
 		
 		if (currentRoomObject.getInv().size() > 0)
@@ -382,7 +387,8 @@ public class Main extends Application
 					+ "\n - Buy (item)"
 					+ "\n - Use (item)"
 					+ "\n - Equip (weapon)"
-					+ "\n - Inventory");
+					+ "\n - Inventory"
+					+ "\n - Hint");
 			
 			recognized = true;
 		}
@@ -518,7 +524,7 @@ public class Main extends Application
 					{
 						ItemPuzzle ip = (ItemPuzzle) currentRoomObject.getPuzzle();
 						
-						if (i3.getName().toLowerCase().equals(ip.getSolutionName().toLowerCase()))
+						if (i3.getName().toLowerCase().equals(ip.getSolution().toLowerCase()))
 						{
 							ip.setSolved();
 							itemUsed = true;
@@ -573,6 +579,20 @@ public class Main extends Application
 			recognized = true;
 		}
 		
+		if (tempInput.toLowerCase().contains("hint") && !recognized)
+		{
+			if (currentRoomObject.getPuzzle() != null)
+			{
+				display(currentRoomObject.getPuzzle().getHint());
+			}
+			else
+			{
+				display("-- No puzzle is present.");
+			}
+			
+			recognized = true;
+		}
+		
 		if (!recognized)
 		{
 			if (currentRoomObject.getPuzzle() != null
@@ -580,7 +600,7 @@ public class Main extends Application
 			{
 				Riddle r = (Riddle) currentRoomObject.getPuzzle();
 				
-				if (tempInput.toLowerCase().equals(r.getSolution()))
+				if (tempInput.toLowerCase().equals(r.getSolution().toLowerCase()))
 				{
 					r.setSolved();
 					recognized = true;
