@@ -64,7 +64,7 @@ public class Main extends Application
 				false, null);
 		rooms.add(deathScreen);
 		
-		RoomControl rc = new RoomControl(rooms);
+		RoomControl rc = new RoomControl(rooms, player);
 		currentRoom = "S1";
 		setRoom(currentRoom);
 		
@@ -77,18 +77,13 @@ public class Main extends Application
 		player.addItem(newPotion);
 		
 		player.addGold(3);
-		
-		//player.setHealth(10000);
 	}
 	
 	public void mainLoop()
-	{	
-		//displayText = "";
-		
+	{		
 		if (displayText.equals("") && currentRoomObject != null)
 		{
 			setRoom(currentRoom);
-			//displayText = currentRoomObject.getDescription();
 		}
 		
 		Iterator<Item> i = player.getInv().iterator();
@@ -370,7 +365,9 @@ public class Main extends Application
 			recognized = true;
 		}
 		
-		if (tempInput.toLowerCase().contains("look") && !recognized)
+		if ((tempInput.toLowerCase().contains("look")
+				|| tempInput.equalsIgnoreCase("l"))
+				&& !recognized)
 		{
 			look();
 			
