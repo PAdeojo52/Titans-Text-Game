@@ -26,7 +26,7 @@ public class Room //TODO extends DescribedObject
 
 	private boolean isShop;
 	private String description, roomID;
-	private ArrayList<Item> inv = new ArrayList(); //TODO Set ArrayList type to Item
+	private ArrayList<Item> inv = new ArrayList<Item>(); //TODO Set ArrayList type to Item
 	private Room north = null, south = null, east = null, west = null;
 	private Puzzle puzzle = null;
 	private Monster monster = null;
@@ -48,7 +48,12 @@ public class Room //TODO extends DescribedObject
 	public void killMonster(Player player)
 	{
 		Main.display("-- The " + monster.getName() + " has been defeated!");
-		player.getItem(monster.getInv().get(0));
+		
+		for (Item i : monster.getInv())
+		{
+			player.getItem(i);
+		}
+		
 		monster = null;
 	}
 	

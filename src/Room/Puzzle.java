@@ -10,6 +10,8 @@
 
 package Room;
 
+import inventory.Usable;
+import Entity.Player;
 import Main.Main;
 
 public class Puzzle
@@ -45,7 +47,7 @@ public class Puzzle
 	/**
 	  * TODO
 	  */
-	public void setSolved()
+	public void setSolved(Player player)
 	{
 		solved = true;
 		room.setLocked(0, false);
@@ -54,6 +56,8 @@ public class Puzzle
 		room.setLocked(3, false);
 		
 		Main.display(solutionText);
+		
+		solveAction(player);
 	}
 	
 	/**
@@ -99,5 +103,24 @@ public class Puzzle
 	public String getSolution()
 	{
 		return solution;
+	}
+	
+	public void setSolution(String newSolution)
+	{
+		solution = newSolution;
+	}
+	
+	public void solveAction(Player player)
+	{
+		if (puzzleID.equals("P2i"))
+		{
+			player.addGold(player.getGold());
+		}
+		
+		if (puzzleID.equals("P3r"))
+		{
+			Usable silverDagger = new Usable(2);
+			player.getItem(silverDagger);
+		}
 	}
 }

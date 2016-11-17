@@ -114,7 +114,7 @@ public class RoomControl
 		"I3",
 		"I5",
 		"I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6",
-		"I2,E4,E5,E6"
+		"E4,E5,E6"
 	};
 	
 	/**
@@ -302,6 +302,7 @@ public class RoomControl
 			roomArray[index].setPuzzle(newItemPuzzle);
 		}
 		
+		/*
 		if(ID[index].equals("M9"))
 		{
 			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[4];
@@ -309,7 +310,9 @@ public class RoomControl
 			newRiddle.setSolutionText("You stand above your unknown assailant, victorious. As you approach he asks for mercy, but he has proved to be quite dangerous. You think for a moment about how you should proceed.");
 			roomArray[index].setPuzzle(newRiddle);	
 		}
+		*/
 		
+		/*
 		if(ID[index].equals("C1"))
 		{
 			ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[1];
@@ -317,6 +320,7 @@ public class RoomControl
 			roomArray[index].setPuzzle(newItemPuzzle);
 			System.out.println(player.getGold());
 		}
+		*/
 		
 		if(ID[index].equals("C3"))
 		{

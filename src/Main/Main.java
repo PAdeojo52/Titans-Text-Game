@@ -64,8 +64,14 @@ public class Main extends Application
 				false, null);
 		rooms.add(deathScreen);
 		
+		Room victoryScreen = new Room("V1",
+				"Congratulations! You have defeated Briarios! You are victorious!",
+				false, null);
+		rooms.add(victoryScreen);
+		
 		RoomControl rc = new RoomControl(rooms, player);
 		currentRoom = "S1";
+		//currentRoom = "T1";
 		setRoom(currentRoom);
 		
 		mainLoopCheck = new Timeline(
@@ -77,6 +83,8 @@ public class Main extends Application
 		player.addItem(newPotion);
 		
 		player.addGold(3);
+		
+		//player.setHealth(9999999);
 	}
 	
 	public void mainLoop()
@@ -106,7 +114,8 @@ public class Main extends Application
 		if (!txt.getInput().equals(""))
 		{
 			if (!currentRoomObject.getID().equals("S1")
-					&& !currentRoomObject.getID().equals("D1"))
+					&& !currentRoomObject.getID().equals("D1")
+					&& !currentRoomObject.getID().equals("V1"))
 			{
 				parseText(txt.getInput());
 			}
@@ -255,6 +264,8 @@ public class Main extends Application
 	{
 		String tempInput = input;
 		
+		int tempInt = 0;
+		
 		boolean recognized = false;
 		
 		if ((tempInput.toLowerCase().contains("attack")
@@ -271,7 +282,15 @@ public class Main extends Application
 				}
 				else
 				{
-					currentRoomObject.killMonster(player);
+					if (currentRoomObject.getMonster().getMonsterID() != 7)
+					{
+						currentRoomObject.killMonster(player);
+					}
+					else
+					{
+						clearScreen();
+						setRoom("V1");
+					}
 				}
 			}
 			else
@@ -523,9 +542,19 @@ public class Main extends Application
 						
 						if (i3.getName().toLowerCase().equals(ip.getSolution().toLowerCase()))
 						{
-							ip.setSolved();
+							ip.setSolved(player);
 							itemUsed = true;
 						}
+					}
+					
+					if (currentRoomObject.getMonster() != null
+							&& currentRoomObject.getMonster().getMonsterID() == 0
+							&& i3.getName().equals("Silver Dagger"))
+					{
+						display("-- The silver dagger vanquished the wraith!");
+						currentRoomObject.killMonster(player);
+						
+						itemUsed = true;
 					}
 					
 					inInventory = true;
@@ -599,7 +628,7 @@ public class Main extends Application
 				
 				if (tempInput.toLowerCase().equals(r.getSolution().toLowerCase()))
 				{
-					r.setSolved();
+					r.setSolved(player);
 					recognized = true;
 				}
 			}

@@ -43,8 +43,8 @@ public class Monster extends Entity
 			"-- A gooey slime stands in your path.",
 			"-- The goblin holds a battle axe.",
 			"-- The orc holds a sword and a shield.",
-			"-- The giant is minding his own business. Maybe he'll leave you alone if you leave him alone.",
-			"-- A giant tree monster.",
+			"-- The giant is minding his own business. Maybe he'll leave you alone if you don't bother him.",
+			"-- A giant tree monster wanders through the woods.",
 			"-- The mercenary is fast and wields two swords.",
 			"-- Briarios himself. You must defeat him!"
 		};
@@ -105,6 +105,15 @@ public class Monster extends Entity
 		{
 			Coin newCoin = new Coin();
 			addItem(newCoin);
+		}
+		
+		if (monID == 6)
+		{
+			for (int i = 5; i > 0; i--)
+			{
+				Coin newCoin = new Coin();
+				addItem(newCoin);
+			}
 		}
 	}
 
