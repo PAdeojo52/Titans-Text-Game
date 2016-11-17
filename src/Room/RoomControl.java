@@ -12,6 +12,7 @@ package Room;
 
 import inventory.Usable;
 import inventory.Weapon;
+import Entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ import Entity.Monster;
 
 public class RoomControl
 {
-	//PuzzleControl pc = new PuzzleControl();
+	PuzzleControl pc;
 	//Holds the room that the player is currently in
 	private Room currentRoom;
 	//Array of all the rooms in the game
@@ -104,15 +105,16 @@ public class RoomControl
 		7		
 	};
 	
-	private String[] itemRooms = {"M1", "M3", "M7", "C2", "C3"};
+	private String[] itemRooms = {"M1", "M3", "M7", "C1", "C2", "C3"};
 	
 	private String[] items =
 	{
 		"E1,E2,E3",
 		"I4",
 		"I3",
+		"I5",
 		"I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6,I6",
-		"E4,E5,E6"
+		"I2,E4,E5,E6"
 	};
 	
 	/**
@@ -120,8 +122,10 @@ public class RoomControl
 	  * roomArray with an ID, description, and shop flag, and to link the rooms together. The
 	  * Constructor also assigns Monsters and Puzzles to the rooms, as well as Items to the rooms
 	  * inventories.  
+	 * @param rooms
+	 * @param player 
 	  */
-	public RoomControl(ArrayList<Room> rooms)
+	public RoomControl(ArrayList<Room> rooms, Player player)
 	{
 		//Populate roomArray
 		for(byte index = 0; index < ID.length; index++)
@@ -164,141 +168,183 @@ public class RoomControl
 				}
 			}
 			
-			PuzzleControl pc = new PuzzleControl(roomArray);
+			pc = new PuzzleControl(roomArray, player);
 			
-			if(ID[index].equals("M3"))
-			{
-				Riddle newRiddle = (Riddle) pc.getPuzzleArray()[3];
-				newRiddle.setLocked(1, true);
-				newRiddle.setSolutionText("-- You reach in the drawing and feel a lever. You pull the lever and part of the wall to the east moves aside, allowing you to progress further.");
-				roomArray[index].setPuzzle(newRiddle);	
-			}
-			
-			if(ID[index].equals("M7"))
-			{
-				ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[6];
-				newItemPuzzle.setLocked(2, true);
-				newItemPuzzle.setSolutionText("-- With the torch you are able to see deeper into the shaft. It looks like the southern part of this mine experienced a small cave-in, which explains all of the debris that you were tripping on earlier.");
-				roomArray[index].setPuzzle(newItemPuzzle);
-			}
-			
-			if(ID[index].equals("M9"))
-			{
-				Riddle newRiddle = (Riddle) pc.getPuzzleArray()[4];
-				newRiddle.setSolutionText("-- You reach in the drawing and feel a lever. You pull the lever and part of the wall to the east moves aside, allowing you to progress further.");
-				roomArray[index].setPuzzle(newRiddle);	
-			}
+			linkPuzzles(index, player);
 			
 			rooms.add(roomArray[index]);
 		}
 		//Link rooms
+		linkRooms();
+		
+	}
+	
+	private void linkRooms()
+	{
 		//Mine Area
-		//M1
-		roomArray[0].setEast(roomArray[1]);
-		//M2
-		roomArray[1].setWest(roomArray[0]);
-		roomArray[1].setNorth(roomArray[2]);
-		//M3
-		roomArray[2].setSouth(roomArray[1]);
-		roomArray[2].setEast(roomArray[3]);
-		//roomArray[2].setPuzzle(pc.getPuzzleArray()[4]);
-		//M4
-		roomArray[3].setWest(roomArray[2]);
-		roomArray[3].setEast(roomArray[4]);
-		//M5
-		roomArray[4].setWest(roomArray[3]);
-		roomArray[4].setSouth(roomArray[5]);
-		roomArray[4].setNorth(roomArray[12]);
-		//M6
-		roomArray[5].setNorth(roomArray[4]);
-		roomArray[5].setSouth(roomArray[6]);
-		//M7
-		roomArray[6].setNorth(roomArray[5]);
-		roomArray[6].setSouth(roomArray[7]);
-		//roomArray[6].setPuzzle(pc.getPuzzleArray()[7]);
-		//M8
-		roomArray[7].setNorth(roomArray[6]);
-		roomArray[7].setEast(roomArray[8]);
-		//M9
-		roomArray[8].setWest(roomArray[7]);
-		//roomArray[8].setPuzzle(pc.getPuzzleArray()[5]);
+				//M1
+				roomArray[0].setEast(roomArray[1]);
+				//M2
+				roomArray[1].setWest(roomArray[0]);
+				roomArray[1].setNorth(roomArray[2]);
+				//M3
+				roomArray[2].setSouth(roomArray[1]);
+				roomArray[2].setEast(roomArray[3]);
+				//M4
+				roomArray[3].setWest(roomArray[2]);
+				roomArray[3].setEast(roomArray[4]);
+				//M5
+				roomArray[4].setWest(roomArray[3]);
+				roomArray[4].setSouth(roomArray[5]);
+				roomArray[4].setNorth(roomArray[12]);
+				//M6
+				roomArray[5].setNorth(roomArray[4]);
+				roomArray[5].setSouth(roomArray[6]);
+				//M7
+				roomArray[6].setNorth(roomArray[5]);
+				roomArray[6].setSouth(roomArray[7]);
+				//M8
+				roomArray[7].setNorth(roomArray[6]);
+				roomArray[7].setEast(roomArray[8]);
+				//M9
+				roomArray[8].setWest(roomArray[7]);
+				
+				//Forest Area
+				//F1
+				roomArray[12].setSouth(roomArray[4]);
+				roomArray[12].setEast(roomArray[13]);
+				//F2
+				roomArray[13].setWest(roomArray[12]);
+				roomArray[13].setEast(roomArray[14]);
+				//F3
+				roomArray[14].setWest(roomArray[13]);
+				roomArray[14].setEast(roomArray[15]);
+				//F4
+				roomArray[15].setWest(roomArray[14]);
+				roomArray[15].setSouth(roomArray[16]);
+				//F5
+				roomArray[16].setNorth(roomArray[15]);
+				roomArray[16].setEast(roomArray[17]);
+				//F6
+				roomArray[17].setWest(roomArray[16]);
+				roomArray[17].setEast(roomArray[9]);
+				//F7
+				roomArray[18].setWest(roomArray[10]);
+				roomArray[18].setEast(roomArray[19]);
+				//F8
+				roomArray[19].setWest(roomArray[18]);
+				roomArray[19].setEast(roomArray[20]);
+				//F9
+				roomArray[20].setWest(roomArray[19]);
+				roomArray[20].setEast(roomArray[21]);
+				
+				//City Area
+				//C1
+				roomArray[9].setWest(roomArray[17]);
+				roomArray[9].setEast(roomArray[10]);
+				//C2
+				roomArray[10].setWest(roomArray[9]);
+				roomArray[10].setNorth(roomArray[11]);
+				roomArray[10].setEast(roomArray[18]);
+				//C3
+				roomArray[11].setSouth(roomArray[10]);
+				
+				//Tower Area
+				//T1
+				roomArray[21].setWest(roomArray[20]);
+				roomArray[21].setEast(roomArray[22]);
+				//T2
+				roomArray[22].setWest(roomArray[21]);
+				roomArray[22].setNorth(roomArray[24]);
+				roomArray[22].setEast(roomArray[23]);
+				//T3
+				roomArray[23].setWest(roomArray[22]);
+				//T4
+				roomArray[24].setSouth(roomArray[22]);
+				roomArray[24].setWest(roomArray[25]);
+				roomArray[24].setEast(roomArray[26]);
+				roomArray[24].setNorth(roomArray[27]);
+				//T5
+				roomArray[25].setEast(roomArray[24]);
+				//T6
+				roomArray[26].setWest(roomArray[24]);
+				//T7
+				roomArray[27].setSouth(roomArray[24]);
+				roomArray[27].setWest(roomArray[28]);
+				roomArray[27].setEast(roomArray[29]);
+				roomArray[27].setNorth(roomArray[30]);
+				//T8
+				roomArray[28].setEast(roomArray[27]);
+				//T9
+				roomArray[29].setWest(roomArray[27]);
+				//T10
+				roomArray[30].setSouth(roomArray[27]);
+				
+				//Assign the currentRoom to the first room
+				currentRoom = roomArray[0];
+	}
+
+	private void linkPuzzles(byte index, Player player)
+	{
+		if(ID[index].equals("M3"))
+		{
+			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[3];
+			newRiddle.setLocked(1, true);
+			newRiddle.setSolutionText("-- You reach in the drawing and feel a lever. You pull the lever and part of the wall to the east moves aside, allowing you to progress further.");
+			roomArray[index].setPuzzle(newRiddle);	
+		}
 		
-		//Forest Area
-		//F1
-		roomArray[12].setSouth(roomArray[4]);
-		roomArray[12].setEast(roomArray[13]);
-		//F2
-		roomArray[13].setWest(roomArray[12]);
-		roomArray[13].setEast(roomArray[14]);
-		//F3
-		roomArray[14].setWest(roomArray[13]);
-		roomArray[14].setEast(roomArray[15]);
-		//F4
-		roomArray[15].setWest(roomArray[14]);
-		roomArray[15].setSouth(roomArray[16]);
-		//F5
-		roomArray[16].setNorth(roomArray[15]);
-		roomArray[16].setEast(roomArray[17]);
-		//F6
-		roomArray[17].setWest(roomArray[16]);
-		roomArray[17].setEast(roomArray[9]);
-		//roomArray[17].setPuzzle(pc.getPuzzleArray()[6]);
-		//F7
-		roomArray[18].setWest(roomArray[10]);
-		roomArray[18].setEast(roomArray[19]);
-		//F8
-		roomArray[19].setWest(roomArray[18]);
-		roomArray[19].setEast(roomArray[20]);
-		//roomArray[19].setPuzzle(pc.getPuzzleArray()[1]);
-		//F9
-		roomArray[20].setWest(roomArray[19]);
-		roomArray[20].setEast(roomArray[21]);
+		if(ID[index].equals("M7"))
+		{
+			ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[6];
+			newItemPuzzle.setLocked(2, true);
+			newItemPuzzle.setSolutionText("-- With the torch you are able to see deeper into the shaft. It looks like the southern part of this mine experienced a small cave-in, which explains all of the debris that you were tripping on earlier.");
+			roomArray[index].setPuzzle(newItemPuzzle);
+		}
 		
-		//City Area
-		//C1
-		roomArray[9].setWest(roomArray[17]);
-		roomArray[9].setEast(roomArray[10]);
-		//roomArray[9].setPuzzle(pc.getPuzzleArray()[2]);
-		//C2
-		roomArray[10].setWest(roomArray[9]);
-		roomArray[10].setNorth(roomArray[11]);
-		roomArray[10].setEast(roomArray[18]);
-		//C3
-		roomArray[11].setSouth(roomArray[10]);
-		//roomArray[11].setPuzzle(pc.getPuzzleArray()[3]);
+		if(ID[index].equals("M9"))
+		{
+			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[4];
+			newRiddle.setLocked(3, true);
+			newRiddle.setSolutionText("You stand above your unknown assailant, victorious. As you approach he asks for mercy, but he has proved to be quite dangerous. You think for a moment about how you should proceed.");
+			roomArray[index].setPuzzle(newRiddle);	
+		}
 		
-		//Tower Area
-		//T1
-		roomArray[21].setWest(roomArray[20]);
-		roomArray[21].setEast(roomArray[22]);
-		//T2
-		roomArray[22].setWest(roomArray[21]);
-		roomArray[22].setNorth(roomArray[24]);
-		roomArray[22].setEast(roomArray[23]);
-		//T3
-		roomArray[23].setWest(roomArray[22]);
-		//T4
-		roomArray[24].setSouth(roomArray[22]);
-		roomArray[24].setWest(roomArray[25]);
-		roomArray[24].setEast(roomArray[26]);
-		roomArray[24].setNorth(roomArray[27]);
-		//T5
-		roomArray[25].setEast(roomArray[24]);
-		//T6
-		roomArray[26].setWest(roomArray[24]);
-		//T7
-		roomArray[27].setSouth(roomArray[24]);
-		roomArray[27].setWest(roomArray[28]);
-		roomArray[27].setEast(roomArray[29]);
-		roomArray[27].setNorth(roomArray[30]);
-		//T8
-		roomArray[28].setEast(roomArray[27]);
-		//T9
-		roomArray[29].setWest(roomArray[27]);
-		//T10
-		roomArray[30].setSouth(roomArray[27]);
+		if(ID[index].equals("C1"))
+		{
+			ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[1];
+			newItemPuzzle.setSolutionText("-- You've found out Grodd's secret. True to his word he's doubled your gold.");
+			roomArray[index].setPuzzle(newItemPuzzle);
+			System.out.println(player.getGold());
+		}
 		
-		//Assign the currentRoom to the first room
-		currentRoom = roomArray[0];
+		if(ID[index].equals("C3"))
+		{
+			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[2];
+			newRiddle.setSolutionText("-- You've bested Roots. For your effort he has rewarded you with an ornate dagger that looks to be made of silver.");
+			roomArray[index].setPuzzle(newRiddle);
+			if(pc.getPuzzleArray()[2].getSolved() == true)
+			{
+				Usable tempUsable = new Usable(2);
+				player.addItem(tempUsable);
+				roomArray[index].removeInv(tempUsable);
+			}
+		}
+		
+		if(ID[index].equals("F6"))
+		{
+			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[5];
+			newRiddle.setSolutionText("-- You wait for the guard to fall asleep and sneek into the city.");
+			newRiddle.setLocked(1, true);
+			roomArray[index].setPuzzle(newRiddle);
+		}
+		
+		if(ID[index].equals("F8"))
+		{
+			ItemPuzzle newItemPuzzle = (ItemPuzzle) pc.getPuzzleArray()[0];
+			newItemPuzzle.setLocked(1, true);
+			newItemPuzzle.setSolutionText("-- You place the Sunstone in the statue's outstretched hand. The statue moves and points it's finger east.");
+			roomArray[index].setPuzzle(newItemPuzzle);
+		}
 	}
 }

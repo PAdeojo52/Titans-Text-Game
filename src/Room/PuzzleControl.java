@@ -13,9 +13,8 @@ package Room;
 import Entity.Player;
 
 public class PuzzleControl
-{
-	private Player player = new Player();	
-	private Integer playerGold = (Integer) player.getGold();
+{	
+	private int playerGold;
 	
 	private Puzzle[] puzzleArray = new Puzzle[8];
 	private String[] puzzleID = {"P1i", "P2i", "P3r", "P4r", "P5r", "P6r", "P7i"};
@@ -26,14 +25,14 @@ public class PuzzleControl
 			//If you win, he doubles your money, and if you lose you lose your bet. The game may be played up to five times.",
 		"Before you can leave the forge you are stopped by a strange man laughing and speaking in riddles. He breafly takes a break from his foolishness to introduce himself as Roots and to offer you a challenge, solve his riddle and he'll give you a powerful weapon. You agree.\n\"The King has an army of soldiers\nThat hiss and fly\nThey wear masks of feathers\nAnd blood that  ____\"",
 			"There is an odd drawing on the wall in the shape of a triangle. It appears to be hollowed out like there was something that used to go in the crevice.",
-		"You stand above your unknown assailant, victorious. As you approach he asks for mercy, but he has proved to be quite dangerous. You think for a moment about how you should proceed.",
+		"-- Your opponent looks vicious. He is blocking your escape.",
 			"The guard watches the road diligently, denying entry to passerby.",
 		"You can't see a thing in this darkness. Continuing in these conditions would be far too dangerous."
 	};
 	private String[] hint = 
 	{
-		"The prince requires a stone of sunlight that you obtain from a merchant in the city.",
-		"You notice Grodd glancing at your coin purse before grabbing his rocks. It's almost as if he's visually weighing it.",
+		"The prince requires an object of great power. You think you saw a shiny trinket back at the Inn.",
+		"You notice Grodd glancing at your coin purse before retrieving his rocks. It's almost as if he's visually weighing it.",
 		"It sounds like the riddle rhymes.",
 		"It looks like there is a lever inside.",
 		"You think long and hard about what to do.",
@@ -43,9 +42,9 @@ public class PuzzleControl
 	private String[] solution = 
 	{
 		"Sunstone",
-		playerGold.toString(),
+		"" + playerGold,
 		"Dries",
-		"Hand",
+		"Pull lever",
 		"Kill or Spare",
 		"Wait",
 		"Torch"
@@ -55,8 +54,10 @@ public class PuzzleControl
 	 * @param roomArray 
 	  * 
 	  */
-	public PuzzleControl(Room[] roomArray)
+	public PuzzleControl(Room[] roomArray, Player player)
 	{
+		playerGold = player.getGold();
+		
 		Room[] puzzleRooms = {roomArray[19], roomArray[9], roomArray[11], roomArray[2], roomArray[8], roomArray[17], roomArray[6]};
 		
 		for(byte index = 0; index < puzzleID.length; index++)

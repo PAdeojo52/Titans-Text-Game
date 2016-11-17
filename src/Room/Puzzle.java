@@ -20,7 +20,6 @@ public class Puzzle
 	private boolean[] locked = {false, false, false, false};
 	private Room room = null;
 	private String solution;
-	//private Object solution, guess;
 	
 	/**
 	  * TODO
@@ -46,7 +45,7 @@ public class Puzzle
 	/**
 	  * TODO
 	  */
-	public void setSolved() //Don't think we actually need this
+	public void setSolved()
 	{
 		solved = true;
 		room.setLocked(0, false);
