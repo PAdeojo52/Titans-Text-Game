@@ -24,6 +24,11 @@ public class Usable extends Item {
 				healthRecov = 50;
 				setPrice(3);
 			}
+		
+		if (useNum == 5)
+		{
+			setPrice(5);
+		}
 	}
 	
 	public int getHealthRecov() {
