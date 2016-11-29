@@ -58,6 +58,8 @@ public class Puzzle
 		Main.display(solutionText);
 		
 		solveAction(player);
+		
+		room.setPuzzle(null);
 	}
 	
 	/**
@@ -121,6 +123,7 @@ public class Puzzle
 		{
 			Usable silverDagger = new Usable(2);
 			player.getItem(silverDagger);
+			
 		}
 	}
 }

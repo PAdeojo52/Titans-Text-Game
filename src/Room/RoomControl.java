@@ -338,7 +338,7 @@ public class RoomControl
 		if(ID[index].equals("F6"))
 		{
 			Riddle newRiddle = (Riddle) pc.getPuzzleArray()[5];
-			newRiddle.setSolutionText("-- You wait for the guard to fall asleep and sneek into the city.");
+			newRiddle.setSolutionText("-- You wait for the guard to fall asleep and sneak into the city.");
 			newRiddle.setLocked(1, true);
 			roomArray[index].setPuzzle(newRiddle);
 		}

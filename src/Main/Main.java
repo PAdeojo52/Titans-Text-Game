@@ -71,7 +71,7 @@ public class Main extends Application
 		
 		RoomControl rc = new RoomControl(rooms, player);
 		currentRoom = "S1";
-		//currentRoom = "T1";
+		currentRoom = "C3";
 		setRoom(currentRoom);
 		
 		mainLoopCheck = new Timeline(
